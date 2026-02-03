@@ -1,5 +1,3 @@
-import Link from 'next/link'
-
 export default function Viewer3D() {
   return (
     <section className="py-24 bg-white">
@@ -37,22 +35,17 @@ export default function Viewer3D() {
                 </li>
               ))}
             </ul>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <a
-                href="https://impression3d.inphenix-system.fr"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-primary"
-              >
-                Obtenir mon devis instantané
-                <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                </svg>
-              </a>
-              <Link href="/contact" className="btn-secondary">
-                Créer un projet similaire
-              </Link>
-            </div>
+            <a
+              href="https://impression3d.inphenix-system.fr"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-primary"
+            >
+              Obtenir mon devis instantané
+              <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+              </svg>
+            </a>
           </div>
 
           {/* Viewer Embed Preview */}

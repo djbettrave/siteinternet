@@ -90,18 +90,20 @@ Tous les fichiers modifiés ou créés lors de cette implémentation.
 
 ---
 
-## Commandes de vérification
+## Corrections Code Review (2026-02-02)
 
-```bash
-# Vérifier qu'il n'y a plus d'émojis secteurs
-grep -r "🏬\|💎\|🎪\|🏗️\|💍\|🤖" src/
+### Fichiers modifiés lors de la code review
 
-# Vérifier qu'il n'y a plus de "1 mètre"
-grep -r "jusqu'à 1 m\|jusqu'à 1m\|1 mètre" src/
+| Fichier | Modifications |
+|---------|---------------|
+| `src/data/sectors.ts` | Suppression des `icon: ''` sur les 6 secteurs |
+| `src/app/layout.tsx` | Tarteaucitron versionné `@latest` → `@1.17.0` |
+| `src/app/realisations/page.tsx` | Filtre services : values alignées sur noms réels, matching exact, category projet 1 corrigée |
+| `src/components/templates/SectorPage.tsx` | Type `icon` rendu optionnel dans `SectorData` |
 
-# Vérifier les fichiers modifiés (si git)
-git status
+---
 
-# Lister les nouvelles pages
-ls -la src/app/mentions-legales/ src/app/politique-confidentialite/
-```
+## Dépôt Git
+
+**Repo :** https://github.com/Djbettrave/siteinternet
+Le suivi des modifications se fait désormais via les commits Git.

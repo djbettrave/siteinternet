@@ -147,8 +147,13 @@ export default function ServicePage({ service }: ServicePageProps) {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {service.features.map((feature, index) => (
-              <div key={index} className="card p-8 hover:shadow-lg hover:border-primary-300 transition-all duration-200">
-                <h3 className="text-xl font-semibold text-secondary-900 mb-3">{feature.title}</h3>
+              <div key={index} className="group card p-8 hover:shadow-lg hover:border-primary-300 transition-all duration-200">
+                <div className="w-14 h-14 rounded-xl bg-primary-100 flex items-center justify-center mb-5 group-hover:bg-primary-600 transition-colors">
+                  <svg className="w-7 h-7 text-primary-600 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d={feature.icon || 'M13 10V3L4 14h7v7l9-11h-7z'} />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-semibold text-secondary-900 mb-3 group-hover:text-primary-600 transition-colors">{feature.title}</h3>
                 <p className="text-secondary-600">{feature.description}</p>
               </div>
             ))}
@@ -156,38 +161,53 @@ export default function ServicePage({ service }: ServicePageProps) {
         </div>
       </section>
 
-      {/* Specs & Materials */}
-      {(service.specs || service.materials) && (
+      {/* Specs */}
+      {service.specs && (
         <section className="py-24 bg-secondary-50">
           <div className="container-custom">
-            <div className="grid lg:grid-cols-2 gap-16">
-              {service.specs && (
-                <div>
-                  <h2 className="text-2xl font-bold text-secondary-900 mb-8">Spécifications techniques</h2>
-                  <div className="bg-white rounded-2xl overflow-hidden border border-secondary-100">
-                    {service.specs.map((spec, index) => (
-                      <div key={index} className={`flex justify-between p-4 ${index !== service.specs!.length - 1 ? 'border-b border-secondary-100' : ''}`}>
-                        <span className="text-secondary-600">{spec.label}</span>
-                        <span className="font-semibold text-secondary-900">{spec.value}</span>
-                      </div>
-                    ))}
+            <div className="text-center mb-12">
+              <h2 className="section-title">Spécifications techniques</h2>
+              <p className="section-subtitle mx-auto">Les caractéristiques clés de cette technologie.</p>
+            </div>
+            <div className="max-w-3xl mx-auto">
+              <div className="bg-white rounded-2xl overflow-hidden shadow-sm border border-secondary-200">
+                {service.specs.map((spec, index) => (
+                  <div key={index} className={`flex items-center justify-between px-6 py-5 ${index !== service.specs!.length - 1 ? 'border-b border-secondary-100' : ''} hover:bg-secondary-50 transition-colors`}>
+                    <div className="flex items-center gap-3">
+                      <div className="w-2 h-2 rounded-full bg-primary-500 flex-shrink-0"></div>
+                      <span className="text-secondary-700 font-medium">{spec.label}</span>
+                    </div>
+                    <span className="font-bold text-secondary-900 bg-secondary-100 px-3 py-1 rounded-lg text-sm">{spec.value}</span>
                   </div>
-                </div>
-              )}
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
 
-              {service.materials && (
-                <div>
-                  <h2 className="text-2xl font-bold text-secondary-900 mb-8">Matériaux disponibles</h2>
-                  <div className="space-y-4">
-                    {service.materials.map((material, index) => (
-                      <div key={index} className="bg-white rounded-xl p-4 border border-secondary-100">
-                        <h3 className="font-semibold text-secondary-900 mb-1">{material.name}</h3>
-                        <p className="text-sm text-secondary-600">{material.properties}</p>
-                      </div>
-                    ))}
+      {/* Materials */}
+      {service.materials && (
+        <section className="py-24 bg-white">
+          <div className="container-custom">
+            <div className="text-center mb-12">
+              <h2 className="section-title">Matériaux disponibles</h2>
+              <p className="section-subtitle mx-auto">Chaque matériau a ses propriétés et usages spécifiques.</p>
+            </div>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {service.materials.map((material, index) => (
+                <div key={index} className="group bg-secondary-50 rounded-xl p-6 border border-secondary-200 hover:border-primary-300 hover:shadow-md transition-all duration-200">
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="w-10 h-10 rounded-lg bg-primary-100 flex items-center justify-center group-hover:bg-primary-600 transition-colors">
+                      <svg className="w-5 h-5 text-primary-600 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+                      </svg>
+                    </div>
+                    <h3 className="font-bold text-secondary-900 text-lg">{material.name}</h3>
                   </div>
+                  <p className="text-secondary-600">{material.properties}</p>
                 </div>
-              )}
+              ))}
             </div>
           </div>
         </section>

@@ -44,19 +44,47 @@
 
 ---
 
+## Code Review (2026-02-02)
+
+**7 issues corrigées sur 8 identifiées par la code review adversariale :**
+
+| # | Issue | Sévérité | Statut |
+|---|-------|----------|--------|
+| 1 | Trust.tsx - data simplifiée, refs images mortes supprimées | HIGH | Corrigé |
+| 2 | Trust.tsx - `.map()` mis à jour pour `brands`/`partners` | HIGH | Corrigé |
+| 3 | sectors.ts - `icon: ''` x6 supprimés | HIGH | Corrigé |
+| 4 | realisations - filtre services cassé (matching exact) | HIGH | Corrigé |
+| 5 | realisations - incohérence sector/category projet 1 | MEDIUM | Corrigé |
+| 6 | Tarteaucitron `@latest` → `@1.17.0` | MEDIUM | Corrigé |
+| 7 | mentions-legales placeholders SIRET/capital | MEDIUM | En attente (Ray) |
+| 8 | Tests automatisés manquants | MEDIUM | Hors scope |
+
+---
+
 ## Ce qui reste à faire (Ray)
 
-1. Ajouter les vrais logos des marques (Louis Vuitton, Dior, etc.)
-2. Ajouter les logos partenaires (BPI France, French Tech)
+1. ~~Ajouter les vrais logos des marques~~ → Gardé en texte pour l'instant
+2. ~~Ajouter les logos partenaires~~ → Gardé en texte pour l'instant
 3. Compléter SIRET et capital social dans les mentions légales
-4. Tester le site en localhost puis déployer
+4. ~~Tester le site en localhost~~ → OK, compilé sans erreur
+5. Déployer sur Vercel
+
+---
+
+## Dépôt Git
+
+**Repo GitHub :** https://github.com/Djbettrave/siteinternet
+**Commit initial :** 2026-02-02 - 407 fichiers, 83220 insertions
+
+A partir de maintenant, le suivi des modifications se fait via les commits Git.
 
 ---
 
 ## Fichiers clés modifiés
 
 - `src/data/services.ts` - Données des services
-- `src/data/sectors.ts` - Données des secteurs
-- `src/components/home/Trust.tsx` - Section "Projets réalisés pour"
+- `src/data/sectors.ts` - Données des secteurs (icon supprimés)
+- `src/components/home/Trust.tsx` - Section "Projets réalisés pour" (data simplifiée)
 - `src/components/home/Viewer3D.tsx` - Section devis instantané
-- `src/app/layout.tsx` - Tarteaucitron cookies
+- `src/app/layout.tsx` - Tarteaucitron cookies (version fixée @1.17.0)
+- `src/app/realisations/page.tsx` - Filtres services corrigés

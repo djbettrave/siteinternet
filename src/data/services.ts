@@ -12,26 +12,32 @@ export const servicesData: Record<string, ServiceData> = {
       {
         title: 'Résistance mécanique',
         description: 'Pièces solides capables de supporter des contraintes mécaniques. Idéales pour des prototypes fonctionnels et pièces d\'usage.',
+        icon: 'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z',
       },
       {
         title: 'Large choix de matériaux',
         description: 'PLA, PETG, ABS, Nylon, PC, matériaux chargés fibres... Un matériau adapté à chaque application.',
+        icon: 'M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4',
       },
       {
         title: 'Grandes dimensions',
         description: 'Volume d\'impression jusqu\'à 30x30x40 cm sur nos machines standard. Grand format disponible.',
+        icon: 'M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4',
       },
       {
         title: 'Coût maîtrisé',
         description: 'Technologie économique, particulièrement avantageuse pour les pièces de volume important.',
+        icon: 'M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z',
       },
       {
         title: 'Rapidité d\'exécution',
         description: 'Pièces livrables en 24-48h pour les urgences. Parc machines important pour absorber les volumes.',
+        icon: 'M13 10V3L4 14h7v7l9-11h-7z',
       },
       {
         title: 'Post-traitement',
         description: 'Ponçage, peinture, assemblage, inserts filetés... Finitions adaptées à vos besoins.',
+        icon: 'M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01',
       },
     ],
     specs: [
@@ -98,26 +104,32 @@ export const servicesData: Record<string, ServiceData> = {
       {
         title: 'Précision extrême',
         description: 'Résolution jusqu\'à 0.025mm pour capturer les plus fins détails. Idéal pour joaillerie et maquettes.',
+        icon: 'M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7',
       },
       {
         title: 'Surface lisse',
         description: 'Finition de surface comparable à l\'injection. Pas de stries de couches visibles.',
+        icon: 'M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z',
       },
       {
         title: 'Résines spécialisées',
         description: 'Résines calcinables pour fonderie, flexibles, haute température, dentaires...',
+        icon: 'M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z',
       },
       {
         title: 'Détails complexes',
         description: 'Gravures, textures, microreliefs parfaitement reproduits.',
+        icon: 'M15 12a3 3 0 11-6 0 3 3 0 016 0z M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z',
       },
       {
         title: 'Moules et masters',
         description: 'Création de masters pour moules silicone ou résines calcinables pour fonte.',
+        icon: 'M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21l-2-1m2 1l2-1m-2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5',
       },
       {
         title: 'Finitions premium',
         description: 'Peinture, métallisation, vernis. Résultat professionnel garanti.',
+        icon: 'M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01',
       },
     ],
     specs: [
@@ -182,26 +194,32 @@ export const servicesData: Record<string, ServiceData> = {
       {
         title: 'Dimensions XXL',
         description: 'Pièces jusqu\'à 85 cm de haut en un seul bloc. Sans limite de taille par assemblage multi-pièces.',
+        icon: 'M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4',
       },
       {
         title: 'Pièces monobloc',
         description: 'Évitez les assemblages quand possible. Solidité et esthétique maximales.',
+        icon: 'M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4',
       },
       {
         title: 'Événementiel',
         description: 'Sculptures, décors, installations. Impact visuel garanti.',
+        icon: 'M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z',
       },
       {
         title: 'Maquettes XXL',
         description: 'Maquettes architecturales grande échelle, prototypes grandeur nature.',
+        icon: 'M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4',
       },
       {
         title: 'Matériaux techniques',
         description: 'PETG, ABS, ASA pour usage extérieur. Résistance garantie.',
+        icon: 'M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4',
       },
       {
         title: 'Assemblage invisible',
         description: 'Pour les pièces plus grandes, assemblage avec finitions parfaites.',
+        icon: 'M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z',
       },
     ],
     specs: [
@@ -210,11 +228,6 @@ export const servicesData: Record<string, ServiceData> = {
       { label: 'Épaisseur de couche', value: '0.2 - 0.8 mm' },
       { label: 'Buse', value: '0.8 - 1.2 mm' },
       { label: 'Délai standard', value: '5-10 jours' },
-    ],
-    materials: [
-      { name: 'PETG', properties: 'Polyvalent, résistant. Usage intérieur et extérieur couvert.' },
-      { name: 'ASA', properties: 'Résistant UV, usage extérieur permanent.' },
-      { name: 'ABS', properties: 'Résistant aux chocs. Pièces techniques.' },
     ],
     faqs: [
       {
@@ -255,26 +268,32 @@ export const servicesData: Record<string, ServiceData> = {
       {
         title: 'Haute précision',
         description: 'Capture au dixième de millimètre. Fidélité parfaite à l\'original.',
+        icon: 'M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7',
       },
       {
         title: 'Tous types d\'objets',
         description: 'Du petit bijou à la carrosserie automobile. Adaptation selon le sujet.',
+        icon: 'M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z',
       },
       {
         title: 'Rétro-ingénierie',
         description: 'Recréez des pièces sans plans. Conversion en fichiers CAO exploitables.',
+        icon: 'M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15',
       },
       {
         title: 'Reproduction',
         description: 'Dupliquez des objets existants, avec ou sans modifications.',
+        icon: 'M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z',
       },
       {
         title: 'Archivage digital',
         description: 'Conservez numériquement des objets patrimoniaux ou de collection.',
+        icon: 'M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4',
       },
       {
         title: 'Export multi-formats',
         description: 'STL, OBJ, STEP selon vos besoins. Compatible tous logiciels CAO.',
+        icon: 'M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12',
       },
     ],
     specs: [
@@ -329,26 +348,32 @@ export const servicesData: Record<string, ServiceData> = {
       {
         title: 'À partir de rien',
         description: 'Une idée, un croquis, une photo ? Nous créons le modèle 3D complet.',
+        icon: 'M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z',
       },
       {
         title: 'Optimisé impression',
         description: 'Modèles conçus pour l\'impression 3D : supports, orientations, tolérances.',
+        icon: 'M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.066 2.573c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.573 1.066c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.066-2.573c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z M15 12a3 3 0 11-6 0 3 3 0 016 0z',
       },
       {
         title: 'Expertise CAO',
         description: 'Logiciels professionnels (Fusion 360, SolidWorks, Rhino) pour tous types de projets.',
+        icon: 'M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z',
       },
       {
         title: 'Itérations rapides',
         description: 'Modifications et ajustements inclus jusqu\'à validation.',
+        icon: 'M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15',
       },
       {
         title: 'Multi-formats',
         description: 'Livraison dans le format de votre choix : STL, STEP, OBJ, 3DM...',
+        icon: 'M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z',
       },
       {
         title: 'Rendus visuels',
         description: 'Rendus photoréalistes pour validation avant production si besoin.',
+        icon: 'M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z',
       },
     ],
     process: [
@@ -397,26 +422,32 @@ export const servicesData: Record<string, ServiceData> = {
       {
         title: 'Prototypes fonctionnels',
         description: 'Testez la résistance, l\'ergonomie, les mécanismes. Validation technique complète.',
+        icon: 'M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.066 2.573c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.573 1.066c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.066-2.573c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z M15 12a3 3 0 11-6 0 3 3 0 016 0z',
       },
       {
         title: 'Prototypes visuels',
         description: 'Validez l\'esthétique, les proportions, l\'aspect. Présentations clients.',
+        icon: 'M15 12a3 3 0 11-6 0 3 3 0 016 0z M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z',
       },
       {
         title: 'Itérations rapides',
         description: 'Modification et nouvelle version en quelques jours. Cycle court garanti.',
+        icon: 'M13 10V3L4 14h7v7l9-11h-7z',
       },
       {
         title: 'Multi-technologies',
         description: 'FDM, résine, usinage... La bonne technologie pour chaque usage.',
+        icon: 'M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z',
       },
       {
         title: 'Assemblages complexes',
         description: 'Prototypes multi-pièces, mécanismes, intégration électronique.',
+        icon: 'M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z',
       },
       {
         title: 'Conseil matériaux',
         description: 'Orientation vers les matériaux et process adaptés à la production future.',
+        icon: 'M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z',
       },
     ],
     process: [
@@ -465,26 +496,32 @@ export const servicesData: Record<string, ServiceData> = {
       {
         title: 'Cartes sur mesure',
         description: 'Conception de PCB adaptés à vos besoins. Du schéma à la carte assemblée.',
+        icon: 'M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z',
       },
       {
         title: 'Motorisation',
         description: 'Intégration de moteurs, servos, actionneurs. Mécanismes complets.',
+        icon: 'M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.066 2.573c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.573 1.066c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.066-2.573c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z M15 12a3 3 0 11-6 0 3 3 0 016 0z',
       },
       {
         title: 'Capteurs',
         description: 'Acquisition de données : température, mouvement, présence, luminosité...',
+        icon: 'M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z',
       },
       {
         title: 'Systèmes embarqués',
         description: 'Programmation de microcontrôleurs, systèmes autonomes, IoT.',
+        icon: 'M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z',
       },
       {
         title: 'Éclairage LED',
         description: 'Intégration d\'éclairages : rubans LED, spots, effets lumineux.',
+        icon: 'M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z',
       },
       {
         title: 'Boîtiers intégrés',
         description: 'Boîtiers imprimés 3D optimisés pour vos cartes. Ensemble cohérent.',
+        icon: 'M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4',
       },
     ],
     process: [
@@ -502,10 +539,6 @@ export const servicesData: Record<string, ServiceData> = {
       {
         question: 'Pouvez-vous reprendre un projet existant ?',
         answer: 'Oui, nous pouvons reprendre et améliorer un projet existant : correction de bugs, ajout de fonctionnalités, optimisation.',
-      },
-      {
-        question: 'Fournissez-vous le code source ?',
-        answer: 'Oui, vous êtes propriétaire du code développé pour votre projet. Documentation technique fournie.',
       },
       {
         question: 'Produisez-vous les cartes en série ?',

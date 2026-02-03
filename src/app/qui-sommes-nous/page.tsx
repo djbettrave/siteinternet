@@ -27,7 +27,7 @@ const values = [
 
 const stats = [
   { value: '+150', label: 'Projets réalisés' },
-  { value: '6', label: 'Secteurs d\'expertise' },
+  { value: '6+', label: 'Secteurs d\'expertise' },
   { value: '24h', label: 'Délai de réponse' },
   { value: '4.9/5', label: 'Satisfaction client' },
 ]

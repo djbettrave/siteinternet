@@ -119,13 +119,28 @@ export default function Header() {
             >
               Qui sommes-nous
             </Link>
+
+            <Link
+              href="/contact"
+              className={`px-4 py-2 font-medium transition-colors ${pathname === '/contact' ? 'text-primary-600' : 'text-secondary-700 hover:text-primary-600'}`}
+            >
+              Contact
+            </Link>
           </div>
 
           {/* CTA Button */}
           <div className="hidden lg:flex items-center space-x-4">
-            <Link href="/contact" className="btn-primary">
-              Demander un devis
-            </Link>
+            <a
+              href="https://impression3d.inphenix-system.fr"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-primary flex items-center gap-2"
+            >
+              Devis instantané
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+              </svg>
+            </a>
           </div>
 
           {/* Mobile menu button */}
@@ -194,15 +209,27 @@ export default function Header() {
                 >
                   Qui sommes-nous
                 </Link>
-              </div>
-              <div className="pt-4">
                 <Link
                   href="/contact"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="btn-primary w-full text-center"
+                  className="block px-4 py-2 text-secondary-700 hover:text-primary-600 font-medium"
                 >
-                  Demander un devis
+                  Contact
                 </Link>
+              </div>
+              <div className="pt-4">
+                <a
+                  href="https://impression3d.inphenix-system.fr"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="btn-primary w-full text-center flex items-center justify-center gap-2"
+                >
+                  Devis instantané
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                  </svg>
+                </a>
               </div>
             </div>
           </div>

@@ -4,6 +4,12 @@ Actions manuelles qui nécessitent l'intervention de Ray.
 
 ---
 
+## Suivi Git
+
+**Le suivi des modifications se fait désormais via GitHub :** https://github.com/Djbettrave/siteinternet
+
+---
+
 ## Priorité Haute
 
 ### 1. Compléter les mentions légales
@@ -22,69 +28,31 @@ Capital social : [À compléter]<br />
 
 ---
 
-### 2. Ajouter les logos des marques
+### 2. Ajouter les logos des marques (optionnel)
 
-**Emplacement :** `public/images/logos/`
+**Statut :** Gardé en texte pour l'instant. Les noms des marques s'affichent en texte dans `Trust.tsx`.
 
-**Logos à ajouter pour "Projets réalisés pour" :**
-
-| Nom du fichier | Marque |
-|----------------|--------|
-| `louis-vuitton.svg` | Louis Vuitton |
-| `balenciaga.svg` | Balenciaga |
-| `dior.svg` | Dior |
-| `chanel.svg` | Chanel |
-| `cartier.svg` | Cartier |
-| `hermes.svg` | Hermès |
-
-**Format recommandé :**
-- SVG monochrome (gris/noir)
-- Hauteur : 40-60px
-- Fond transparent
-
-**Fichier à modifier après ajout :**
-`src/components/home/Trust.tsx` - Remplacer les placeholders texte par des balises `<img>`
-
-```tsx
-// Avant (placeholder actuel)
-<div className="text-secondary-400 font-semibold text-lg">{brand.name}</div>
-
-// Après (avec vrais logos)
-<img src={brand.logo} alt={brand.name} className="h-10 w-auto" />
-```
+Si tu veux ajouter les logos plus tard :
+- Placer les SVG dans `public/images/logos/`
+- Modifier `src/components/home/Trust.tsx` pour utiliser des `<img>`
 
 ---
 
-### 3. Ajouter les logos partenaires
+### 3. Ajouter les logos partenaires (optionnel)
 
-**Emplacement :** `public/images/logos/`
-
-**Logos à ajouter pour "Partenaires" :**
-
-| Nom du fichier | Partenaire |
-|----------------|------------|
-| `bpi-france.svg` | BPI France |
-| `french-tech.svg` | Bourse French Tech |
-
-**Même format que les logos marques.**
+**Statut :** Gardé en texte pour l'instant (BPI France, Bourse French Tech).
 
 ---
 
 ## Priorité Moyenne
 
-### 4. Tester le site en localhost
+### 4. ~~Tester le site en localhost~~ FAIT
 
-```bash
-cd C:\Users\rayan\Desktop\inphenix_website
-npm run dev
-```
-
-**Points à vérifier :**
-- [ ] Navigation fonctionne
-- [ ] Filtres réalisations fonctionnent
-- [ ] Pages mentions légales et politique confidentialité accessibles
-- [ ] Banner cookies Tarteaucitron s'affiche
-- [ ] Pas d'erreurs console
+- [x] Navigation fonctionne
+- [x] Filtres réalisations corrigés (code review)
+- [x] Pages mentions légales et politique confidentialité accessibles
+- [x] Banner cookies Tarteaucitron s'affiche (version fixée @1.17.0)
+- [x] Compilation sans erreur
 
 ---
 
@@ -94,11 +62,6 @@ Tester sur :
 - [ ] Desktop (1920px+)
 - [ ] Tablette (768px)
 - [ ] Mobile (375px)
-
-**Pages critiques à vérifier :**
-- Accueil (section "Projets réalisés pour")
-- Réalisations (filtres)
-- Contact (formulaire)
 
 ---
 
@@ -134,16 +97,19 @@ tarteaucitron.user.gtagUa = 'G-XXXXXXXXXX'; // Ton ID GA4
 
 - [ ] SIRET ajouté dans mentions légales
 - [ ] Capital social ajouté dans mentions légales
-- [ ] Logos marques ajoutés (ou décision de garder les placeholders texte)
-- [ ] Logos partenaires ajoutés
-- [ ] Test localhost OK
-- [ ] Test responsive OK
+- [x] ~~Logos marques~~ → Gardé en texte
+- [x] ~~Logos partenaires~~ → Gardé en texte
+- [x] Test localhost OK
+- [x] Code review OK (7/8 issues corrigées)
+- [x] Projet poussé sur GitHub
+- [ ] Test responsive
 - [ ] Déploiement Vercel
 
 ---
 
-## Contact support
+## Dépôt Git
 
-Pour toute question sur ces modifications :
-- Relancer `/quick-dev` avec ce dossier en contexte
-- Référencer ce changelog dans la demande
+**Repo :** https://github.com/Djbettrave/siteinternet
+**Commit initial :** 2026-02-02
+
+Le changelog-v1 est désormais figé. Les modifications futures sont suivies via les commits Git.

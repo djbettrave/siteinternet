@@ -180,8 +180,13 @@ export default function SectorPage({ sector }: SectorPageProps) {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {sector.useCases.map((useCase, index) => (
-              <div key={index} className="card p-8 hover:shadow-lg hover:border-primary-300 transition-all duration-200">
-                <h3 className="text-xl font-semibold text-secondary-900 mb-3">{useCase.title}</h3>
+              <div key={index} className="group card p-8 hover:shadow-lg hover:border-primary-300 transition-all duration-200">
+                <div className="w-14 h-14 rounded-xl bg-primary-100 flex items-center justify-center mb-5 group-hover:bg-primary-600 transition-colors">
+                  <svg className="w-7 h-7 text-primary-600 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d={useCase.icon || 'M13 10V3L4 14h7v7l9-11h-7z'} />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-semibold text-secondary-900 mb-3 group-hover:text-primary-600 transition-colors">{useCase.title}</h3>
                 <p className="text-secondary-600">{useCase.description}</p>
               </div>
             ))}
