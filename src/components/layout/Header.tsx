@@ -65,7 +65,7 @@ export default function Header() {
                     <Link
                       key={service.href}
                       href={service.href}
-                      className="block px-4 py-3 hover:bg-secondary-50 transition-colors"
+                      className="block px-4 py-3 mx-2 rounded-lg hover:bg-primary-50 transition-colors"
                     >
                       <div className="font-medium text-secondary-900">{service.name}</div>
                       <div className="text-sm text-secondary-500">{service.description}</div>
@@ -97,7 +97,7 @@ export default function Header() {
                     <Link
                       key={secteur.href}
                       href={secteur.href}
-                      className="block px-4 py-3 hover:bg-secondary-50 transition-colors"
+                      className="block px-4 py-3 mx-2 rounded-lg hover:bg-primary-50 transition-colors"
                     >
                       <span className="font-medium text-secondary-900">{secteur.name}</span>
                     </Link>
@@ -175,7 +175,7 @@ export default function Header() {
                     key={service.href}
                     href={service.href}
                     onClick={() => setMobileMenuOpen(false)}
-                    className="block px-4 py-2 text-secondary-600 hover:text-primary-600 hover:bg-secondary-50 rounded-lg"
+                    className="block px-4 py-2 mx-2 text-secondary-600 hover:text-primary-600 hover:bg-primary-50 rounded-lg"
                   >
                     {service.name}
                   </Link>
@@ -188,7 +188,7 @@ export default function Header() {
                     key={secteur.href}
                     href={secteur.href}
                     onClick={() => setMobileMenuOpen(false)}
-                    className="block px-4 py-2 text-secondary-600 hover:text-primary-600 hover:bg-secondary-50 rounded-lg"
+                    className="block px-4 py-2 mx-2 text-secondary-600 hover:text-primary-600 hover:bg-primary-50 rounded-lg"
                   >
                     {secteur.name}
                   </Link>
