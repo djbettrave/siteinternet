@@ -4,7 +4,7 @@ import { sectorsList } from '@/data/sectors'
 
 export const metadata: Metadata = {
   title: 'Nos Secteurs d\'Expertise',
-  description: 'Découvrez nos expertises sectorielles en impression 3D et électronique : Retail, Luxe, Événementiel, Architecture, Joaillerie, Robotique.',
+  description: 'Découvrez nos expertises sectorielles en impression 3D et électronique : Retail, Luxe, Événementiel, Architecture, Robotique.',
 }
 
 export default function SecteursPage() {

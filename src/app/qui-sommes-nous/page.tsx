@@ -27,7 +27,7 @@ const values = [
 
 const stats = [
   { value: '+150', label: 'Projets réalisés' },
-  { value: '6+', label: 'Secteurs d\'expertise' },
+  { value: '5+', label: 'Secteurs d\'expertise' },
   { value: '24h', label: 'Délai de réponse' },
   { value: '4.9/5', label: 'Satisfaction client' },
 ]
@@ -85,7 +85,7 @@ export default function QuiSommesNousPage() {
                 </p>
                 <p>
                   Aujourd'hui, nous travaillons avec des clients de tous secteurs :
-                  retail, luxe, événementiel, architecture, joaillerie, robotique...
+                  retail, luxe, événementiel, architecture, robotique...
                   Chaque projet est une nouvelle aventure technique et créative.
                 </p>
               </div>

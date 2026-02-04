@@ -17,7 +17,7 @@ const faqs = [
   },
   {
     question: 'Quels secteurs d\'activité accompagnez-vous ?',
-    answer: 'Nous accompagnons 6 secteurs principaux : Retail (PLV, présentoirs), Luxe (packaging, displays), Événementiel (installations, déco), Architecture (maquettes), Joaillerie (moules, prototypes) et Robotique (châssis, électronique). Notre expertise s\'adapte à vos besoins spécifiques.',
+    answer: 'Nous accompagnons 5 secteurs principaux : Retail (PLV, présentoirs), Luxe (packaging, displays), Événementiel (installations, déco), Architecture (maquettes) et Robotique (châssis, électronique). Notre expertise s\'adapte à vos besoins spécifiques.',
   },
   {
     question: 'Comment fonctionne votre outil de devis en ligne ?',

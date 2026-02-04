@@ -59,7 +59,7 @@ export default function Hero() {
               </div>
               <div className="h-6 w-px bg-white/20 hidden sm:block"></div>
               <div className="text-secondary-400 text-sm">
-                <span className="text-white font-semibold">6</span> secteurs d'expertise
+                <span className="text-white font-semibold">5+</span> secteurs d'expertise
               </div>
             </div>
           </div>

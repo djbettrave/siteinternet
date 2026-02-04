@@ -15,7 +15,6 @@ const secteurs = [
   { name: 'Luxe', href: '/secteurs/luxe' },
   { name: 'Événementiel', href: '/secteurs/evenementiel' },
   { name: 'Architecture', href: '/secteurs/architecture' },
-  { name: 'Joaillerie', href: '/secteurs/joaillerie' },
   { name: 'Robotique', href: '/secteurs/robotique' },
 ]
 
@@ -52,7 +51,7 @@ export default function Footer() {
               <span className="text-2xl font-bold text-white">Inphenix</span>
               <span className="text-2xl font-light text-secondary-400">System</span>
             </Link>
-            <p className="text-secondary-400 mb-6">
+            <p className="text-secondary-300 mb-6">
               Bureau d'étude spécialisé en impression 3D et développement électronique.
               Du prototype à la série, nous donnons vie à vos projets.
             </p>
@@ -70,7 +69,7 @@ export default function Footer() {
             <ul className="space-y-3">
               {services.map((service) => (
                 <li key={service.href}>
-                  <Link href={service.href} className="text-secondary-400 hover:text-white transition-colors">
+                  <Link href={service.href} className="text-secondary-300 hover:text-white transition-colors">
                     {service.name}
                   </Link>
                 </li>
@@ -84,7 +83,7 @@ export default function Footer() {
             <ul className="space-y-3">
               {secteurs.map((secteur) => (
                 <li key={secteur.href}>
-                  <Link href={secteur.href} className="text-secondary-400 hover:text-white transition-colors">
+                  <Link href={secteur.href} className="text-secondary-300 hover:text-white transition-colors">
                     {secteur.name}
                   </Link>
                 </li>
@@ -97,14 +96,14 @@ export default function Footer() {
             <h3 className="font-semibold text-lg mb-4">Contact</h3>
             <ul className="space-y-4">
               <li>
-                <Link href="/contact" className="text-secondary-400 hover:text-white transition-colors flex items-start gap-3">
+                <Link href="/contact" className="text-secondary-300 hover:text-white transition-colors flex items-start gap-3">
                   <svg className="w-5 h-5 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                   </svg>
                   <span>contact@inphenix-system.fr</span>
                 </Link>
               </li>
-              <li className="flex items-start gap-3 text-secondary-400">
+              <li className="flex items-start gap-3 text-secondary-300">
                 <svg className="w-5 h-5 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />

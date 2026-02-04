@@ -7,7 +7,7 @@ const stats = [
   { value: '4.9/5', label: 'Note moyenne', sublabel: 'sur nos projets' },
   { value: '+150', label: 'Projets', sublabel: 'réalisés' },
   { value: '24h', label: 'Réponse', sublabel: 'garantie' },
-  { value: '6+', label: 'Secteurs', sublabel: 'd\'expertise' },
+  { value: '5+', label: 'Secteurs', sublabel: 'd\'expertise' },
 ]
 
 // Marques pour lesquelles nous avons réalisé des projets

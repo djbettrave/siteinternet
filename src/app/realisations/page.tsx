@@ -11,7 +11,7 @@ const projects = [
     sector: 'luxe',
     services: ['Impression 3D FDM', 'Électronique'],
     description: 'Présentoir avec éclairage LED intégré et capteur de présence pour une grande maison de parfumerie.',
-    image: '/images/projects/placeholder.jpg',
+    image: '',
   },
   {
     id: 2,
@@ -20,7 +20,7 @@ const projects = [
     sector: 'architecture',
     services: ['Impression 3D Résine', 'Modélisation 3D'],
     description: 'Maquette de présentation pour concours architectural avec détails de façade haute précision.',
-    image: '/images/projects/placeholder.jpg',
+    image: '',
   },
   {
     id: 3,
@@ -29,7 +29,7 @@ const projects = [
     sector: 'evenementiel',
     services: ['Impression Grand Format', 'Électronique'],
     description: 'Structure lumineuse modulaire de 3 mètres pour un salon professionnel.',
-    image: '/images/projects/placeholder.jpg',
+    image: '',
   },
   {
     id: 4,
@@ -38,25 +38,16 @@ const projects = [
     sector: 'robotique',
     services: ['Impression 3D FDM', 'Électronique', 'Modélisation 3D'],
     description: 'Châssis et électronique de contrôle pour startup robotique.',
-    image: '/images/projects/placeholder.jpg',
+    image: '',
   },
   {
     id: 5,
-    title: 'Collection bijoux contemporains',
-    category: 'Joaillerie',
-    sector: 'joaillerie',
-    services: ['Impression 3D Résine', 'Modélisation 3D'],
-    description: 'Série de moules pour fonte à cire perdue, formes organiques complexes.',
-    image: '/images/projects/placeholder.jpg',
-  },
-  {
-    id: 6,
     title: 'Display comptoir cosmétiques',
     category: 'Retail',
     sector: 'retail',
     services: ['Impression 3D FDM', 'Prototypage'],
     description: 'Série de 50 displays identiques pour déploiement en points de vente.',
-    image: '/images/projects/placeholder.jpg',
+    image: '',
   },
 ]
 
@@ -67,7 +58,6 @@ const filters = {
     { value: 'luxe', label: 'Luxe' },
     { value: 'evenementiel', label: 'Événementiel' },
     { value: 'architecture', label: 'Architecture' },
-    { value: 'joaillerie', label: 'Joaillerie' },
     { value: 'robotique', label: 'Robotique' },
   ],
   services: [
@@ -193,11 +183,11 @@ export default function RealisationsPage() {
             ))}
           </div>
 
-          {/* Load More */}
+          {/* CTA vers contact */}
           <div className="text-center mt-12">
-            <button className="btn-outline">
-              Voir plus de projets
-            </button>
+            <Link href="/contact" className="btn-outline">
+              Discuter de votre projet
+            </Link>
           </div>
         </div>
       </section>

@@ -18,7 +18,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/secteurs/luxe',
     '/secteurs/evenementiel',
     '/secteurs/architecture',
-    '/secteurs/joaillerie',
     '/secteurs/robotique',
     '/realisations',
     '/qui-sommes-nous',

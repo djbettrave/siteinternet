@@ -19,7 +19,6 @@ const sectors = [
   'Luxe',
   'Événementiel',
   'Architecture',
-  'Joaillerie',
   'Robotique',
   'Autre',
 ]
@@ -33,14 +32,50 @@ export default function ContactPage() {
     service: '',
     sector: '',
     message: '',
-    file: null as File | null,
   })
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // TODO: Implement form submission
-    console.log('Form submitted:', formData)
-    alert('Merci pour votre message ! Nous vous répondrons sous 24h.')
+    setIsSubmitting(true)
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          company: formData.company,
+          phone: formData.phone,
+          service: formData.service,
+          sector: formData.sector,
+          message: formData.message,
+        }),
+      })
+
+      if (response.ok) {
+        setFormData({
+          name: '',
+          email: '',
+          company: '',
+          phone: '',
+          service: '',
+          sector: '',
+          message: '',
+        })
+        alert('Merci pour votre message ! Nous vous répondrons sous 24h.')
+      } else {
+        alert('Une erreur est survenue. Veuillez réessayer ou nous contacter directement par email.')
+      }
+    } catch (error) {
+      console.error('Erreur lors de l\'envoi:', error)
+      alert('Une erreur est survenue. Veuillez réessayer ou nous contacter directement par email.')
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -267,36 +302,9 @@ export default function ContactPage() {
                     />
                   </div>
 
-                  <div>
-                    <label className="block text-sm font-medium text-secondary-700 mb-2">
-                      Joindre un fichier (optionnel)
-                    </label>
-                    <div className="border-2 border-dashed border-secondary-200 rounded-lg p-6 text-center hover:border-primary-300 transition-colors cursor-pointer">
-                      <input
-                        type="file"
-                        id="file"
-                        className="hidden"
-                        accept=".stl,.obj,.step,.stp,.3mf,.pdf,.jpg,.png"
-                        onChange={(e) => setFormData({ ...formData, file: e.target.files?.[0] || null })}
-                      />
-                      <label htmlFor="file" className="cursor-pointer">
-                        <svg className="w-10 h-10 text-secondary-400 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
-                        </svg>
-                        <p className="text-secondary-600">
-                          <span className="text-primary-600 font-medium">Cliquez pour uploader</span> ou glissez-déposez
-                        </p>
-                        <p className="text-sm text-secondary-500 mt-1">
-                          STL, OBJ, STEP, 3MF, PDF, JPG, PNG (max. 50 Mo)
-                        </p>
-                      </label>
-                    </div>
-                    {formData.file && (
-                      <p className="text-sm text-green-600 mt-2">
-                        Fichier sélectionné : {formData.file.name}
-                      </p>
-                    )}
-                  </div>
+                  <p className="text-sm text-secondary-500">
+                    Besoin d'envoyer un fichier 3D ? Mentionnez-le dans votre message, nous vous recontacterons pour le récupérer.
+                  </p>
 
                   <div className="flex items-start gap-3">
                     <input
@@ -311,8 +319,12 @@ export default function ContactPage() {
                     </label>
                   </div>
 
-                  <button type="submit" className="btn-primary w-full text-lg py-4">
-                    Envoyer ma demande
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="btn-primary w-full text-lg py-4 disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    {isSubmitting ? 'Envoi en cours...' : 'Envoyer ma demande'}
                     <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                     </svg>

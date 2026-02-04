@@ -19,7 +19,6 @@ const secteurs = [
   { name: 'Luxe', href: '/secteurs/luxe' },
   { name: 'Événementiel', href: '/secteurs/evenementiel' },
   { name: 'Architecture', href: '/secteurs/architecture' },
-  { name: 'Joaillerie', href: '/secteurs/joaillerie' },
   { name: 'Robotique', href: '/secteurs/robotique' },
 ]
 

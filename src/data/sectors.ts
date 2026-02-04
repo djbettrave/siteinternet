@@ -159,7 +159,6 @@ export const sectorsData: Record<string, SectorData> = {
     },
     stats: [
       { value: '+40', label: 'projets Luxe' },
-      { value: '0.1mm', label: 'précision résine' },
       { value: 'NDA', label: 'confidentialité' },
     ],
   },
@@ -240,7 +239,6 @@ export const sectorsData: Record<string, SectorData> = {
     },
     stats: [
       { value: '+35', label: 'projets Événementiel' },
-      { value: '85cm', label: 'monobloc max' },
       { value: '48h', label: 'prototypage express' },
     ],
   },
@@ -317,89 +315,7 @@ export const sectorsData: Record<string, SectorData> = {
     },
     stats: [
       { value: '+15', label: 'projets Architecture' },
-      { value: '1:20', label: 'échelle min.' },
       { value: 'BIM', label: 'compatible' },
-    ],
-  },
-
-  joaillerie: {
-    slug: 'joaillerie',
-    name: 'Joaillerie',
-    headline: 'Précision ultime pour la Joaillerie',
-    subheadline: 'Moules pour fonte à cire perdue, prototypes haute définition et outillage sur mesure pour créateurs et maisons de joaillerie.',
-    description: 'Inphenix System accompagne les joailliers avec des solutions d\'impression résine haute précision pour moules cire perdue, prototypes et outillage. Détails au centième de millimètre.',
-    useCases: [
-      {
-        title: 'Moules Cire Perdue',
-        description: 'Impression directe de moules calcinables pour la fonte. Résines spéciales compatible bijouterie.',
-        icon: 'M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z',
-      },
-      {
-        title: 'Prototypes de Création',
-        description: 'Visualisez vos créations avant fonte. Validez les proportions, l\'ergonomie et l\'esthétique.',
-        icon: 'M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z',
-      },
-      {
-        title: 'Masters pour Moules',
-        description: 'Créez des masters haute précision pour vos moules silicone. Production en série facilitée.',
-        icon: 'M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z',
-      },
-      {
-        title: 'Outillage sur Mesure',
-        description: 'Gabarits de sertissage, supports de travail, outils spécifiques. Optimisez votre atelier.',
-        icon: 'M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z',
-      },
-      {
-        title: 'Numérisation de Pièces',
-        description: 'Scan 3D de bijoux existants pour reproduction, modification ou archivage digital.',
-        icon: 'M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7',
-      },
-      {
-        title: 'Pièces Contemporaines',
-        description: 'Bijoux en impression directe pour créateurs. Formes impossibles en fabrication traditionnelle.',
-        icon: 'M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01',
-      },
-    ],
-    benefits: [
-      'Précision au centième de millimètre (0.025mm)',
-      'Résines calcinables compatibles fonte',
-      'Surface lisse, détails impeccables',
-      'Scan 3D pour reproduction fidèle',
-      'Délais courts pour itérations rapides',
-      'Confidentialité de vos créations',
-    ],
-    services: [
-      { name: 'Impression 3D Résine', href: '/services/impression-3d/resine' },
-      { name: 'Scan 3D', href: '/services/scan-3d' },
-      { name: 'Modélisation 3D', href: '/services/modelisation-3d' },
-      { name: 'Prototypage Rapide', href: '/services/prototypage' },
-    ],
-    faqs: [
-      {
-        question: 'Vos résines sont-elles compatibles avec la fonte à cire perdue ?',
-        answer: 'Oui, nous utilisons des résines calcinables spécialement formulées pour la bijouterie. Elles brûlent sans résidu et donnent d\'excellents résultats en fonte.',
-      },
-      {
-        question: 'Quelle précision pour les détails fins ?',
-        answer: 'Notre résolution atteint 0.025mm, permettant de reproduire les détails les plus fins : gravures, textures, microreliefs. Idéal pour la joaillerie de précision.',
-      },
-      {
-        question: 'Pouvez-vous scanner et reproduire un bijou ancien ?',
-        answer: 'Oui, nous scannons vos pièces existantes avec une précision de 0.05mm. Nous pouvons ensuite reproduire, modifier ou restaurer numériquement avant impression.',
-      },
-      {
-        question: 'Quels formats de fichiers acceptez-vous ?',
-        answer: 'Nous travaillons avec les formats joaillerie courants : STL, OBJ, 3DM (Rhino), STEP. Nous proposons aussi un service de modélisation si vous n\'avez qu\'un croquis.',
-      },
-    ],
-    cta: {
-      title: 'Une création joaillière à concrétiser ?',
-      description: 'De l\'esquisse au moule, nous accompagnons vos créations avec une précision de joaillier.',
-    },
-    stats: [
-      { value: '+10', label: 'projets Joaillerie' },
-      { value: '0.025mm', label: 'précision' },
-      { value: '24h', label: 'moules rapides' },
     ],
   },
 
@@ -479,7 +395,6 @@ export const sectorsData: Record<string, SectorData> = {
     },
     stats: [
       { value: '+20', label: 'projets Robotique' },
-      { value: 'PA12-CF', label: 'matériaux techniques' },
       { value: '360°', label: 'accompagnement' },
     ],
   },

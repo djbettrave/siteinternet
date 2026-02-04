@@ -52,11 +52,10 @@ export default function MentionsLegalesPage() {
 
             <h3>Hébergeur</h3>
             <p>
-              <strong>LWS (Ligne Web Services)</strong><br />
-              10 rue de Penthièvre<br />
-              75008 Paris, France<br />
-              Téléphone : 01 77 62 30 03<br />
-              <a href="https://www.lws.fr" target="_blank" rel="noopener noreferrer">https://www.lws.fr</a>
+              <strong>Vercel Inc.</strong><br />
+              340 S Lemon Ave #4133<br />
+              Walnut, CA 91789, États-Unis<br />
+              <a href="https://vercel.com" target="_blank" rel="noopener noreferrer">https://vercel.com</a>
             </p>
 
             <h2>2. Propriété intellectuelle</h2>
