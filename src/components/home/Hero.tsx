@@ -41,7 +41,7 @@ export default function Hero() {
             </div>
 
             {/* Trust Indicators */}
-            <div className="flex flex-wrap items-center gap-6 mt-12 pt-8 border-t border-white/10">
+            <div className="flex flex-wrap items-center gap-4 lg:gap-6 mt-12 pt-8 border-t border-white/10">
               <div className="flex items-center gap-2">
                 <div className="flex -space-x-1">
                   {[1, 2, 3, 4, 5].map((i) => (
@@ -50,16 +50,21 @@ export default function Hero() {
                     </svg>
                   ))}
                 </div>
-                <span className="text-white font-semibold">4.9/5</span>
-                <span className="text-secondary-400 text-sm">sur nos projets</span>
+                <span className="text-white font-semibold text-sm lg:text-base">5/5</span>
+                <span className="text-secondary-400 text-xs lg:text-sm">avis Google</span>
               </div>
               <div className="h-6 w-px bg-white/20 hidden sm:block"></div>
-              <div className="text-secondary-400 text-sm">
-                <span className="text-white font-semibold">+150</span> projets réalisés
+              <div className="text-secondary-400 text-xs lg:text-sm">
+                <span className="text-white font-semibold">+300</span> projets
               </div>
               <div className="h-6 w-px bg-white/20 hidden sm:block"></div>
-              <div className="text-secondary-400 text-sm">
+              <div className="text-secondary-400 text-xs lg:text-sm">
                 <span className="text-white font-semibold">5+</span> secteurs d'expertise
+              </div>
+              <div className="h-6 w-px bg-white/20 hidden sm:block"></div>
+              <div className="text-secondary-400 text-xs lg:text-sm flex items-center gap-1.5">
+                <span className="text-base lg:text-lg">🇫🇷</span>
+                <span className="text-white font-semibold whitespace-nowrap">Made in France</span>
               </div>
             </div>
           </div>

@@ -254,7 +254,7 @@ export const servicesData: Record<string, ServiceData> = {
     relatedServices: [
       { name: 'Impression 3D FDM', href: '/services/impression-3d/fdm' },
       { name: 'Modélisation 3D', href: '/services/modelisation-3d' },
-      { name: 'Prototypage Rapide', href: '/services/prototypage' },
+      { name: 'Prototypage', href: '/services/prototypage' },
     ],
   },
 
@@ -334,7 +334,7 @@ export const servicesData: Record<string, ServiceData> = {
     relatedServices: [
       { name: 'Modélisation 3D', href: '/services/modelisation-3d' },
       { name: 'Impression 3D Résine', href: '/services/impression-3d/resine' },
-      { name: 'Prototypage Rapide', href: '/services/prototypage' },
+      { name: 'Prototypage', href: '/services/prototypage' },
     ],
   },
 
@@ -408,14 +408,14 @@ export const servicesData: Record<string, ServiceData> = {
     relatedServices: [
       { name: 'Scan 3D', href: '/services/scan-3d' },
       { name: 'Impression 3D FDM', href: '/services/impression-3d/fdm' },
-      { name: 'Prototypage Rapide', href: '/services/prototypage' },
+      { name: 'Prototypage', href: '/services/prototypage' },
     ],
   },
 
   'prototypage': {
     slug: 'prototypage',
-    name: 'Prototypage Rapide',
-    headline: 'Prototypage Rapide - Du concept au prototype',
+    name: 'Prototypage',
+    headline: 'Prototypage - Du concept au prototype',
     subheadline: 'Validez vos idées rapidement avec des prototypes fonctionnels. Itérations rapides, tests utilisateurs, validation avant production.',
     description: 'Le prototypage rapide permet de tester vos concepts avant investissement lourd. Prototypes visuels ou fonctionnels, nous adaptons l\'approche à vos objectifs.',
     features: [
@@ -551,7 +551,7 @@ export const servicesData: Record<string, ServiceData> = {
     },
     relatedServices: [
       { name: 'Impression 3D FDM', href: '/services/impression-3d/fdm' },
-      { name: 'Prototypage Rapide', href: '/services/prototypage' },
+      { name: 'Prototypage', href: '/services/prototypage' },
       { name: 'Modélisation 3D', href: '/services/modelisation-3d' },
     ],
   },

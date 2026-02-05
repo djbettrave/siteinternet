@@ -41,8 +41,8 @@ export default function LocalBusinessSchema() {
     },
     aggregateRating: {
       '@type': 'AggregateRating',
-      ratingValue: '4.9',
-      reviewCount: '150',
+      ratingValue: '5',
+      reviewCount: '300',
     },
   }
 

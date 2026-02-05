@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import type { Metadata } from 'next'
 
 export interface SectorData {
@@ -100,6 +101,16 @@ export default function SectorPage({ sector }: SectorPageProps) {
 
       {/* Hero Section */}
       <section className="relative bg-gradient-to-br from-secondary-900 via-secondary-800 to-primary-900 overflow-hidden">
+        {sector.heroImage && (
+          <Image
+            src={sector.heroImage}
+            alt={`Projet Inphenix System pour le secteur ${sector.name}`}
+            fill
+            className="object-cover opacity-20"
+            sizes="100vw"
+            priority
+          />
+        )}
         <div className="container-custom relative">
           <div className="py-20 lg:py-28">
             <div className="max-w-3xl">

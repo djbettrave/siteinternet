@@ -33,3 +33,10 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# source photos (raw, not for deploy)
+src/photos site internet/
+
+# planning docs
+GUIDE_IMAGES.md
+nul

@@ -4,6 +4,7 @@ export const sectorsData: Record<string, SectorData> = {
   retail: {
     slug: 'retail',
     name: 'Retail',
+    heroImage: '/images/secteurs/retail/retail-1.jpeg',
     headline: 'Solutions sur mesure pour le Retail',
     subheadline: 'PLV, présentoirs, displays et solutions de merchandising innovantes grâce à l\'impression 3D et l\'électronique.',
     description: 'Inphenix System accompagne le secteur Retail avec des solutions de PLV, présentoirs et displays sur mesure. Impression 3D pour prototypes et petites séries, électronique intégrée pour displays interactifs.',
@@ -86,6 +87,7 @@ export const sectorsData: Record<string, SectorData> = {
   luxe: {
     slug: 'luxe',
     name: 'Luxe',
+    heroImage: '/images/secteurs/luxe/luxe-1.jpeg',
     headline: 'L\'excellence au service du Luxe',
     subheadline: 'Packaging premium, displays haute couture et pièces d\'exception pour les maisons de luxe.',
     description: 'Inphenix System accompagne les maisons de luxe avec des solutions de packaging, displays et pièces sur mesure. Finitions premium, détails impeccables, confidentialité garantie.',
@@ -133,7 +135,7 @@ export const sectorsData: Record<string, SectorData> = {
       { name: 'Impression 3D Résine', href: '/services/impression-3d/resine' },
       { name: 'Impression 3D FDM', href: '/services/impression-3d/fdm' },
       { name: 'Modélisation 3D', href: '/services/modelisation-3d' },
-      { name: 'Prototypage Rapide', href: '/services/prototypage' },
+      { name: 'Prototypage', href: '/services/prototypage' },
     ],
     faqs: [
       {
@@ -166,6 +168,7 @@ export const sectorsData: Record<string, SectorData> = {
   evenementiel: {
     slug: 'evenementiel',
     name: 'Événementiel',
+    heroImage: '/images/secteurs/evenementiel/evenementiel-1.jpeg',
     headline: 'Créez l\'impact pour vos événements',
     subheadline: 'Installations spectaculaires, décors sur mesure et expériences immersives pour marquer les esprits.',
     description: 'Inphenix System crée des installations et décors sur mesure pour l\'événementiel : salons, lancements produits, soirées corporate, spectacles. Impact visuel et réalisation technique garantis.',
@@ -246,6 +249,7 @@ export const sectorsData: Record<string, SectorData> = {
   architecture: {
     slug: 'architecture',
     name: 'Architecture',
+    heroImage: '/images/secteurs/architecture/architecture-1.jpeg',
     headline: 'Donnez forme à vos projets architecturaux',
     subheadline: 'Maquettes de présentation, prototypes de composants et solutions sur mesure pour architectes et constructeurs.',
     description: 'Inphenix System accompagne les architectes et professionnels du BTP avec des maquettes de présentation, prototypes de composants et pièces sur mesure. Précision et rendu professionnel garantis.',
@@ -322,6 +326,7 @@ export const sectorsData: Record<string, SectorData> = {
   robotique: {
     slug: 'robotique',
     name: 'Robotique',
+    heroImage: '/images/secteurs/robotique/robotique-1.jpeg',
     headline: 'Du prototype au robot fonctionnel',
     subheadline: 'Châssis, boîtiers, pièces mécaniques et électronique embarquée pour vos projets robotiques.',
     description: 'Inphenix System accompagne les projets robotiques de A à Z : conception mécanique, impression 3D de pièces fonctionnelles, développement électronique et motorisation. Votre partenaire technique complet.',
@@ -369,7 +374,7 @@ export const sectorsData: Record<string, SectorData> = {
       { name: 'Impression 3D FDM', href: '/services/impression-3d/fdm' },
       { name: 'Électronique & Motorisation', href: '/services/electronique' },
       { name: 'Modélisation 3D', href: '/services/modelisation-3d' },
-      { name: 'Prototypage Rapide', href: '/services/prototypage' },
+      { name: 'Prototypage', href: '/services/prototypage' },
     ],
     faqs: [
       {

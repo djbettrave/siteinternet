@@ -1,102 +1,124 @@
 'use client'
 
+import { useCallback } from 'react'
 import useEmblaCarousel from 'embla-carousel-react'
-import Autoplay from 'embla-carousel-autoplay'
-
-const stats = [
-  { value: '4.9/5', label: 'Note moyenne', sublabel: 'sur nos projets' },
-  { value: '+150', label: 'Projets', sublabel: 'réalisés' },
-  { value: '24h', label: 'Réponse', sublabel: 'garantie' },
-  { value: '5+', label: 'Secteurs', sublabel: 'd\'expertise' },
-]
+import Image from 'next/image'
 
 // Marques pour lesquelles nous avons réalisé des projets
 const brands = [
-  'Louis Vuitton',
-  'Balenciaga',
-  'Dior',
-  'Chanel',
-  'Cartier',
-  'Hermès',
+  { name: 'Dior', logo: '/images/logos/clients/dior.svg', width: 120 },
+  { name: 'Chanel', logo: '/images/logos/clients/chanel.svg', width: 100 },
+  { name: 'Guerlain', logo: '/images/logos/clients/guerlain.svg', width: 120 },
+  { name: 'Hugo Boss', logo: '/images/logos/clients/hugo-boss.svg', width: 100 },
+  { name: 'Cacharel', logo: '/images/logos/clients/cacharel.svg', width: 120 },
+  { name: 'Coty', logo: '/images/logos/clients/coty.svg', width: 300 },
+  { name: 'Kiehl\'s', logo: '/images/logos/clients/kiehls.svg', width: 90 },
+  { name: 'Rimowa', logo: '/images/logos/clients/rimowa.svg', width: 100 },
+  { name: 'Samsung', logo: '/images/logos/clients/samsung.svg', width: 100 },
+  { name: 'Balmain', logo: '/images/logos/clients/balmain.svg', width: 110 },
+  { name: 'Berluti', logo: '/images/logos/clients/berluti.svg', width: 110 },
+  { name: 'Intersnack', logo: '/images/logos/clients/intersnack.png', width: 110 },
+  { name: 'Byredo', logo: '/images/logos/clients/byredo.svg', width: 100 },
+  { name: 'Polène', logo: '/images/logos/clients/polene.jpeg', width: 100 },
 ]
 
 // Partenaires institutionnels
 const partners = [
-  'BPI France',
-  'Bourse French Tech',
+  { name: 'BPI France', logo: '/images/logos/partenaires/bpifrance.png' },
+  { name: 'French Tech', logo: '/images/logos/partenaires/french-tech.png' },
+  { name: 'CCI France', logo: '/images/logos/partenaires/cci-france.png' },
+  { name: 'Made in 92', logo: '/images/logos/partenaires/made-in-92.jpg' },
+  { name: 'Technowest', logo: '/images/logos/partenaires/technowest.png' },
 ]
 
 export default function Trust() {
-  const [brandsRef] = useEmblaCarousel(
-    { loop: true, align: 'start', dragFree: true },
-    [Autoplay({ delay: 2500, stopOnInteraction: false })]
+  const [brandsRef, brandsApi] = useEmblaCarousel(
+    { loop: true, align: 'start', slidesToScroll: 3 },
+    []
   )
 
-  const [partnersRef] = useEmblaCarousel(
-    { loop: true, align: 'center', dragFree: true },
-    [Autoplay({ delay: 3000, stopOnInteraction: false })]
-  )
+  const scrollPrev = useCallback(() => brandsApi?.scrollPrev(), [brandsApi])
+  const scrollNext = useCallback(() => brandsApi?.scrollNext(), [brandsApi])
 
   return (
     <section className="py-24 bg-secondary-50">
       <div className="container-custom">
-        {/* Stats */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 mb-20">
-          {stats.map((stat) => (
-            <div key={stat.label} className="text-center">
-              <div className="text-4xl lg:text-5xl font-bold text-primary-600 mb-2">
-                {stat.value}
-              </div>
-              <div className="font-medium text-secondary-900">{stat.label}</div>
-              <div className="text-sm text-secondary-500">{stat.sublabel}</div>
-            </div>
-          ))}
-        </div>
-
         {/* Projets réalisés pour */}
-        <div className="text-center mb-12">
+        <div className="text-center mb-8">
           <h2 className="section-title">Projets réalisés pour</h2>
         </div>
 
-        {/* Carousel marques */}
-        <div className="overflow-hidden" ref={brandsRef}>
-          <div className="flex">
-            {[...brands, ...brands].map((name, index) => (
-              <div
-                key={`${name}-${index}`}
-                className="flex-none w-1/3 md:w-1/4 lg:w-1/6 px-4"
-              >
-                <div className="flex items-center justify-center h-20 bg-white rounded-xl border border-secondary-200 grayscale hover:grayscale-0 opacity-60 hover:opacity-100 transition-all duration-300 cursor-pointer">
-                  <span className="text-secondary-500 font-semibold text-lg">{name}</span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
+        {/* Carousel marques avec flèches */}
+        <div className="relative">
+          {/* Flèche gauche */}
+          <button
+            onClick={scrollPrev}
+            className="absolute -left-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 bg-white rounded-full shadow-md border border-secondary-200 flex items-center justify-center hover:bg-secondary-50 transition-colors"
+            aria-label="Précédent"
+          >
+            <svg className="w-5 h-5 text-secondary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
 
-        {/* Disclaimer */}
-        <p className="text-xs text-secondary-400 text-center mt-8">
-          Certains projets ont été réalisés en tant que sous-traitant ou partenaire technique, pour le compte d'agences ou de prestataires intermédiaires.
-        </p>
+          {/* Flèche droite */}
+          <button
+            onClick={scrollNext}
+            className="absolute -right-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 bg-white rounded-full shadow-md border border-secondary-200 flex items-center justify-center hover:bg-secondary-50 transition-colors"
+            aria-label="Suivant"
+          >
+            <svg className="w-5 h-5 text-secondary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
 
-        {/* Section Partenaires */}
-        <div className="mt-20">
-          <div className="text-center mb-8">
-            <h3 className="text-2xl font-bold text-secondary-900 mb-2">Partenaires</h3>
-          </div>
-          <div className="overflow-hidden" ref={partnersRef}>
+          <div className="overflow-hidden mx-6" ref={brandsRef}>
             <div className="flex">
-              {[...partners, ...partners, ...partners].map((name, index) => (
+              {brands.map((brand, index) => (
                 <div
-                  key={`${name}-${index}`}
-                  className="flex-none w-1/2 md:w-1/3 lg:w-1/4 px-4"
+                  key={`${brand.name}-${index}`}
+                  className="flex-none w-1/4 md:w-1/5 lg:w-[11.11%] px-2"
                 >
-                  <div className="flex items-center justify-center h-16 bg-white rounded-xl border border-secondary-200 grayscale hover:grayscale-0 opacity-60 hover:opacity-100 transition-all duration-300 cursor-pointer">
-                    <span className="text-secondary-500 font-semibold">{name}</span>
+                  <div className="flex items-center justify-center h-14 bg-white rounded-lg border border-secondary-200 grayscale hover:grayscale-0 opacity-60 hover:opacity-100 transition-all duration-300 cursor-pointer px-3">
+                    <Image
+                      src={brand.logo}
+                      alt={brand.name}
+                      width={brand.width}
+                      height={32}
+                      className="object-contain max-h-8"
+                    />
                   </div>
                 </div>
               ))}
             </div>
+          </div>
+        </div>
+
+        {/* Disclaimer */}
+        <p className="text-[10px] italic text-secondary-400 text-center mt-6">
+          Certains projets ont été réalisés en tant que sous-traitant ou partenaire technique, pour le compte d'agences ou de prestataires intermédiaires.
+        </p>
+
+        {/* Section Partenaires */}
+        <div className="mt-16">
+          <div className="text-center mb-8">
+            <h3 className="text-2xl font-bold text-secondary-900 mb-2">Partenaires</h3>
+          </div>
+          <div className="flex justify-center gap-4">
+            {partners.map((partner) => (
+              <div
+                key={partner.name}
+                className="flex items-center justify-center h-14 w-36 bg-white rounded-lg border border-secondary-200 grayscale hover:grayscale-0 opacity-60 hover:opacity-100 transition-all duration-300 cursor-pointer px-3"
+              >
+                <Image
+                  src={partner.logo}
+                  alt={partner.name}
+                  width={90}
+                  height={32}
+                  className="object-contain max-h-8"
+                />
+              </div>
+            ))}
           </div>
         </div>
 

@@ -62,8 +62,8 @@ export default function OrganizationSchema() {
     },
     aggregateRating: {
       '@type': 'AggregateRating',
-      ratingValue: '4.9',
-      reviewCount: '150',
+      ratingValue: '5',
+      reviewCount: '300',
       bestRating: '5',
       worstRating: '1',
     },

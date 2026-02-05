@@ -1,87 +1,94 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
+import type { ProjectImage } from '@/types/project'
 
-const projects = [
-  {
-    id: 1,
-    title: 'Présentoir interactif parfumerie',
-    category: 'Luxe',
-    sector: 'luxe',
-    services: ['Impression 3D FDM', 'Électronique'],
-    description: 'Présentoir avec éclairage LED intégré et capteur de présence pour une grande maison de parfumerie.',
-    image: '',
-  },
-  {
-    id: 2,
-    title: 'Maquette architecturale 1:50',
-    category: 'Architecture',
-    sector: 'architecture',
-    services: ['Impression 3D Résine', 'Modélisation 3D'],
-    description: 'Maquette de présentation pour concours architectural avec détails de façade haute précision.',
-    image: '',
-  },
-  {
-    id: 3,
-    title: 'Installation événementielle 3m',
-    category: 'Événementiel',
-    sector: 'evenementiel',
-    services: ['Impression Grand Format', 'Électronique'],
-    description: 'Structure lumineuse modulaire de 3 mètres pour un salon professionnel.',
-    image: '',
-  },
-  {
-    id: 4,
-    title: 'Prototype robot collaboratif',
-    category: 'Robotique',
-    sector: 'robotique',
-    services: ['Impression 3D FDM', 'Électronique', 'Modélisation 3D'],
-    description: 'Châssis et électronique de contrôle pour startup robotique.',
-    image: '',
-  },
-  {
-    id: 5,
-    title: 'Display comptoir cosmétiques',
-    category: 'Retail',
-    sector: 'retail',
-    services: ['Impression 3D FDM', 'Prototypage'],
-    description: 'Série de 50 displays identiques pour déploiement en points de vente.',
-    image: '',
-  },
-]
+type FilterStatus = 'all' | 'completed' | 'process'
 
-const filters = {
-  sectors: [
-    { value: 'all', label: 'Tous les secteurs' },
-    { value: 'retail', label: 'Retail' },
-    { value: 'luxe', label: 'Luxe' },
-    { value: 'evenementiel', label: 'Événementiel' },
-    { value: 'architecture', label: 'Architecture' },
-    { value: 'robotique', label: 'Robotique' },
-  ],
-  services: [
-    { value: 'all', label: 'Tous les services' },
-    { value: 'Impression 3D FDM', label: 'Impression 3D FDM' },
-    { value: 'Impression 3D Résine', label: 'Impression 3D Résine' },
-    { value: 'Impression Grand Format', label: 'Grand Format' },
-    { value: 'Électronique', label: 'Électronique' },
-    { value: 'Modélisation 3D', label: 'Modélisation 3D' },
-    { value: 'Prototypage', label: 'Prototypage' },
-  ],
+// Mapping des services vers leurs URLs
+const serviceUrlMap: Record<string, string> = {
+  'Impression 3D FDM': '/services/impression-3d/fdm',
+  'Impression 3D Résine': '/services/impression-3d/resine',
+  'Impression Grand Format': '/services/impression-3d/grand-format',
+  'Scan 3D': '/services/scan-3d',
+  'Modélisation 3D': '/services/modelisation-3d',
+  'Prototypage': '/services/prototypage',
+  'Électronique & Motorisation': '/services/electronique',
 }
 
 export default function RealisationsPage() {
-  const [selectedSector, setSelectedSector] = useState('all')
-  const [selectedService, setSelectedService] = useState('all')
+  const [projects, setProjects] = useState<ProjectImage[]>([])
+  const [loading, setLoading] = useState(true)
+  const [selectedStatus, setSelectedStatus] = useState<FilterStatus>('completed')
+  const [lightboxOpen, setLightboxOpen] = useState(false)
+  const [currentImageIndex, setCurrentImageIndex] = useState(0)
+
+  useEffect(() => {
+    // Charger les projets depuis l'API
+    fetch('/api/projects')
+      .then(res => res.json())
+      .then(data => {
+        setProjects(data.projects || [])
+        setLoading(false)
+      })
+      .catch(error => {
+        console.error('Erreur lors du chargement des projets:', error)
+        setLoading(false)
+      })
+  }, [])
 
   const filteredProjects = projects.filter((project) => {
-    const matchesSector = selectedSector === 'all' || project.sector === selectedSector
-    const matchesService = selectedService === 'all' || project.services.some(s =>
-      s === selectedService
-    )
-    return matchesSector && matchesService
+    if (selectedStatus === 'all') return true
+    return project.status === selectedStatus
   })
+
+  // Scroll vers le haut quand le filtre change
+  useEffect(() => {
+    // Ne pas scroller au premier chargement
+    if (projects.length === 0) return
+
+    // Scroller vers la section des projets
+    const projectsSection = document.querySelector('#projects-section')
+    if (projectsSection) {
+      projectsSection.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }
+  }, [selectedStatus, projects.length])
+
+  const closeLightbox = useCallback(() => {
+    setLightboxOpen(false)
+    document.body.style.overflow = ''
+  }, [])
+
+  const openLightbox = (index: number) => {
+    setCurrentImageIndex(index)
+    setLightboxOpen(true)
+    document.body.style.overflow = 'hidden'
+  }
+
+  // Gestion du clavier pour le lightbox
+  useEffect(() => {
+    if (!lightboxOpen) return
+
+    const filteredLength = projects.filter((project) => {
+      if (selectedStatus === 'all') return true
+      return project.status === selectedStatus
+    }).length
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        closeLightbox()
+      } else if (e.key === 'ArrowLeft') {
+        setCurrentImageIndex((prev) => (prev - 1 + filteredLength) % filteredLength)
+      } else if (e.key === 'ArrowRight') {
+        setCurrentImageIndex((prev) => (prev + 1) % filteredLength)
+      }
+    }
+
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [lightboxOpen, projects, selectedStatus, closeLightbox])
 
   return (
     <>
@@ -93,41 +100,32 @@ export default function RealisationsPage() {
               Nos réalisations
             </h1>
             <p className="text-xl text-secondary-300">
-              Découvrez une sélection de projets réalisés pour nos clients.
-              Chaque projet est unique, adapté aux besoins spécifiques de chaque secteur.
+              Découvrez nos projets terminés et suivez l'avancement de nos réalisations en cours.
+              Chaque projet illustre notre expertise et notre engagement qualité.
             </p>
           </div>
         </div>
       </section>
 
       {/* Filters */}
-      <section className="py-8 bg-secondary-50 border-b border-secondary-200 sticky top-20 z-40">
+      <section className="py-3 bg-secondary-50 border-b border-secondary-200 sticky top-20 z-40">
         <div className="container-custom">
-          <div className="flex flex-wrap gap-4">
+          <div className="flex flex-wrap gap-3 items-center">
             <select
-              className="px-4 py-2 bg-white border border-secondary-200 rounded-lg text-secondary-700 focus:outline-none focus:ring-2 focus:ring-primary-500"
-              value={selectedSector}
-              onChange={(e) => setSelectedSector(e.target.value)}
+              className="px-3 py-1.5 bg-white border-2 border-secondary-300 rounded-lg text-secondary-700 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500"
+              value={selectedStatus}
+              onChange={(e) => setSelectedStatus(e.target.value as FilterStatus)}
             >
-              {filters.sectors.map((filter) => (
-                <option key={filter.value} value={filter.value}>{filter.label}</option>
-              ))}
+              <option value="completed">Projets clients</option>
+              <option value="process">Notre atelier</option>
+              <option value="all">Tous les projets</option>
             </select>
-            <select
-              className="px-4 py-2 bg-white border border-secondary-200 rounded-lg text-secondary-700 focus:outline-none focus:ring-2 focus:ring-primary-500"
-              value={selectedService}
-              onChange={(e) => setSelectedService(e.target.value)}
-            >
-              {filters.services.map((filter) => (
-                <option key={filter.value} value={filter.value}>{filter.label}</option>
-              ))}
-            </select>
-            {(selectedSector !== 'all' || selectedService !== 'all') && (
+            {selectedStatus !== 'completed' && (
               <button
-                onClick={() => { setSelectedSector('all'); setSelectedService('all') }}
-                className="px-4 py-2 text-primary-600 hover:text-primary-700 font-medium"
+                onClick={() => setSelectedStatus('completed')}
+                className="text-sm text-primary-600 hover:text-primary-700 font-medium"
               >
-                Réinitialiser les filtres
+                Réinitialiser
               </button>
             )}
           </div>
@@ -135,60 +133,80 @@ export default function RealisationsPage() {
       </section>
 
       {/* Projects Grid */}
-      <section className="py-16 bg-white">
+      <section id="projects-section" className="py-16 bg-white">
         <div className="container-custom">
-          {filteredProjects.length === 0 ? (
+          {loading ? (
             <div className="text-center py-12">
-              <p className="text-secondary-600">Aucun projet ne correspond à ces filtres.</p>
+              <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-secondary-900"></div>
+              <p className="text-secondary-600 mt-4">Chargement des projets...</p>
             </div>
-          ) : null}
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredProjects.map((project) => (
-              <article key={project.id} className="card group">
-                {/* Image Placeholder */}
-                <div className="aspect-[4/3] bg-gradient-to-br from-secondary-100 to-secondary-200 flex items-center justify-center">
-                  <div className="text-center p-8">
-                    <div className="w-16 h-16 mx-auto mb-4 bg-secondary-300/50 rounded-2xl flex items-center justify-center">
-                      <svg className="w-8 h-8 text-secondary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                      </svg>
-                    </div>
-                    <p className="text-sm text-secondary-400">Image du projet</p>
-                  </div>
-                </div>
-                <div className="p-6">
-                  <div className="flex items-center gap-2 mb-3">
-                    <span className="text-xs font-medium text-primary-600 bg-primary-50 px-2 py-1 rounded">
-                      {project.category}
-                    </span>
-                  </div>
-                  <h3 className="text-lg font-semibold text-secondary-900 mb-2 group-hover:text-primary-600 transition-colors">
-                    {project.title}
-                  </h3>
-                  <p className="text-secondary-600 text-sm mb-4">
-                    {project.description}
-                  </p>
-                  <div className="flex flex-wrap gap-1">
-                    {project.services.map((service) => (
-                      <span
-                        key={service}
-                        className="text-xs text-secondary-500 bg-secondary-100 px-2 py-0.5 rounded"
-                      >
-                        {service}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </article>
-            ))}
-          </div>
+          ) : filteredProjects.length === 0 ? (
+            <div className="text-center py-12">
+              <p className="text-secondary-600">
+                Aucun projet ne correspond à ce filtre.
+              </p>
+            </div>
+          ) : (
+            <>
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {filteredProjects.map((project, index) => (
+                  <article key={project.id} className="group relative overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300">
+                    {/* Image avec aspect ratio 4:3 */}
+                    <div
+                      className="aspect-[4/3] relative overflow-hidden bg-secondary-100 cursor-pointer"
+                      onClick={() => openLightbox(index)}
+                    >
+                      <Image
+                        src={project.path}
+                        alt={project.title}
+                        fill
+                        className="object-cover group-hover:scale-105 transition-transform duration-500"
+                        style={{ objectPosition: project.objectPosition || 'center' }}
+                        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      />
 
-          {/* CTA vers contact */}
-          <div className="text-center mt-12">
-            <Link href="/contact" className="btn-outline">
-              Discuter de votre projet
-            </Link>
-          </div>
+                      {/* Overlay au hover avec badges services */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-secondary-900/95 via-secondary-900/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center p-6">
+                        {/* Badges services avec liens */}
+                        <div className="flex flex-wrap gap-2 justify-center">
+                          {(project.services.length > 0 ? project.services : ['Prototypage']).map((service, idx) => {
+                            const serviceUrl = serviceUrlMap[service]
+                            if (!serviceUrl) return (
+                              <span key={idx} className="text-xs font-medium text-white bg-white/20 backdrop-blur-sm px-3 py-1.5 rounded-full border border-white/30">
+                                {service}
+                              </span>
+                            )
+                            return (
+                              <Link
+                                key={idx}
+                                href={serviceUrl}
+                                onClick={(e) => e.stopPropagation()}
+                                className="text-xs font-medium text-white bg-white/20 backdrop-blur-sm hover:bg-white/30 px-3 py-1.5 rounded-full border border-white/30 transition-colors"
+                              >
+                                {service}
+                              </Link>
+                            )
+                          })}
+                        </div>
+                      </div>
+                    </div>
+                  </article>
+                ))}
+              </div>
+
+              {/* Compteur de projets */}
+              <div className="text-center mt-8 text-sm text-secondary-600">
+                {filteredProjects.length} projet{filteredProjects.length > 1 ? 's' : ''} affiché{filteredProjects.length > 1 ? 's' : ''}
+              </div>
+
+              {/* CTA vers contact */}
+              <div className="text-center mt-12">
+                <Link href="/contact" className="btn-outline">
+                  Discuter de votre projet
+                </Link>
+              </div>
+            </>
+          )}
         </div>
       </section>
 
@@ -216,8 +234,8 @@ export default function RealisationsPage() {
                 </svg>
               </a>
             </div>
-            <div className="w-48 h-48 bg-gradient-to-br from-primary-100 to-primary-200 rounded-2xl flex items-center justify-center">
-              <svg className="w-20 h-20 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="w-48 h-48 bg-gradient-to-br from-secondary-100 to-secondary-200 rounded-2xl flex items-center justify-center">
+              <svg className="w-20 h-20 text-secondary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21l-2-1m2 1l2-1m-2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5" />
               </svg>
             </div>
@@ -226,22 +244,122 @@ export default function RealisationsPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-24 bg-primary-600">
+      <section className="py-24 bg-secondary-900">
         <div className="container-custom">
           <div className="text-center max-w-2xl mx-auto">
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
               Envie de créer votre projet ?
             </h2>
-            <p className="text-xl text-primary-100 mb-8">
+            <p className="text-xl text-secondary-300 mb-8">
               Discutons de votre idée. Nous vous accompagnons de la conception
               à la réalisation.
             </p>
-            <Link href="/contact" className="bg-white text-primary-600 hover:bg-primary-50 px-8 py-4 rounded-lg font-semibold text-lg transition-colors inline-block">
+            <Link href="/contact" className="bg-white text-secondary-900 hover:bg-secondary-100 px-8 py-4 rounded-lg font-semibold text-lg transition-colors inline-block">
               Demander un devis gratuit
             </Link>
           </div>
         </div>
       </section>
+
+      {/* Lightbox */}
+      {lightboxOpen && filteredProjects[currentImageIndex] && (
+        <div
+          className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center p-4"
+          onClick={() => closeLightbox()}
+        >
+          {/* Bouton fermer */}
+          <button
+            onClick={() => closeLightbox()}
+            className="absolute top-4 right-4 text-white hover:text-secondary-300 transition-colors z-10"
+            aria-label="Fermer"
+          >
+            <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+
+          {/* Bouton précédent */}
+          {filteredProjects.length > 1 && (
+            <button
+              onClick={(e) => {
+                e.stopPropagation()
+                setCurrentImageIndex((prev) => (prev - 1 + filteredProjects.length) % filteredProjects.length)
+              }}
+              className="absolute left-4 top-1/2 -translate-y-1/2 text-white hover:text-secondary-300 transition-colors bg-black/50 rounded-full p-3 backdrop-blur-sm"
+              aria-label="Image précédente"
+            >
+              <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
+          )}
+
+          {/* Bouton suivant */}
+          {filteredProjects.length > 1 && (
+            <button
+              onClick={(e) => {
+                e.stopPropagation()
+                setCurrentImageIndex((prev) => (prev + 1) % filteredProjects.length)
+              }}
+              className="absolute right-4 top-1/2 -translate-y-1/2 text-white hover:text-secondary-300 transition-colors bg-black/50 rounded-full p-3 backdrop-blur-sm"
+              aria-label="Image suivante"
+            >
+              <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+          )}
+
+          {/* Contenu du lightbox */}
+          <div
+            className="relative max-w-7xl max-h-[90vh] flex flex-col items-center"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Image */}
+            <div className="relative w-full h-full flex items-center justify-center mb-4">
+              <Image
+                src={filteredProjects[currentImageIndex].path}
+                alt={filteredProjects[currentImageIndex].title}
+                width={1920}
+                height={1080}
+                className="max-w-full max-h-[80vh] w-auto h-auto object-contain rounded-lg"
+                priority
+              />
+            </div>
+
+            {/* Badges de services */}
+            <div className="flex flex-wrap gap-2 justify-center mt-4">
+              {(filteredProjects[currentImageIndex].services.length > 0
+                ? filteredProjects[currentImageIndex].services
+                : ['Prototypage']
+              ).map((service, idx) => {
+                const serviceUrl = serviceUrlMap[service]
+                if (!serviceUrl) return (
+                  <span key={idx} className="text-sm font-medium text-white bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full border border-white/30">
+                    {service}
+                  </span>
+                )
+                return (
+                  <Link
+                    key={idx}
+                    href={serviceUrl}
+                    className="text-sm font-medium text-white bg-white/20 backdrop-blur-sm hover:bg-white/30 px-4 py-2 rounded-full border border-white/30 transition-colors"
+                  >
+                    {service}
+                  </Link>
+                )
+              })}
+            </div>
+
+            {/* Compteur */}
+            {filteredProjects.length > 1 && (
+              <div className="text-white/70 text-sm mt-4">
+                {currentImageIndex + 1} / {filteredProjects.length}
+              </div>
+            )}
+          </div>
+        </div>
+      )}
     </>
   )
 }

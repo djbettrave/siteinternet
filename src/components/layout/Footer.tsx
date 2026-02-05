@@ -6,7 +6,7 @@ const services = [
   { name: 'Impression Grand Format', href: '/services/impression-3d/grand-format' },
   { name: 'Scan 3D', href: '/services/scan-3d' },
   { name: 'Modélisation 3D', href: '/services/modelisation-3d' },
-  { name: 'Prototypage Rapide', href: '/services/prototypage' },
+  { name: 'Prototypage', href: '/services/prototypage' },
   { name: 'Électronique & Motorisation', href: '/services/electronique' },
 ]
 

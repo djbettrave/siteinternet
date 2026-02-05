@@ -24,7 +24,7 @@ const services = [
     features: ['Scan haute définition', 'Rétro-ingénierie', 'Modélisation CAO'],
   },
   {
-    title: 'Prototypage Rapide',
+    title: 'Prototypage',
     description: 'Du concept au prototype fonctionnel. Itérations rapides pour valider vos idées avant production.',
     href: '/services/prototypage',
     icon: (

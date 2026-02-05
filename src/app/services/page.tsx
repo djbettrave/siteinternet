@@ -54,7 +54,7 @@ const serviceCategories = [
     description: 'Accompagnement complet pour vos projets de développement.',
     services: [
       {
-        name: 'Prototypage Rapide',
+        name: 'Prototypage',
         description: 'Du concept au prototype fonctionnel, itérations rapides.',
         href: '/services/prototypage',
         features: ['Validation rapide', 'Multi-technologies', 'Conseil'],

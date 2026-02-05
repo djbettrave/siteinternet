@@ -1,5 +1,6 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
+import Image from 'next/image'
 
 export const metadata: Metadata = {
   title: 'Qui sommes-nous ?',
@@ -23,13 +24,17 @@ const values = [
     title: 'Qualité',
     description: 'Contrôle qualité rigoureux sur chaque pièce. Nous ne livrons que ce dont nous sommes fiers.',
   },
+  {
+    title: '🇫🇷 Made in France',
+    description: 'Atelier basé à Suresnes. Fabrication locale, savoir-faire français, réactivité et proximité garanties.',
+  },
 ]
 
 const stats = [
-  { value: '+150', label: 'Projets réalisés' },
+  { value: '+300', label: 'Projets réalisés' },
   { value: '5+', label: 'Secteurs d\'expertise' },
   { value: '24h', label: 'Délai de réponse' },
-  { value: '4.9/5', label: 'Satisfaction client' },
+  { value: '5/5', label: 'Avis Google' },
 ]
 
 const capabilities = [
@@ -43,7 +48,7 @@ const capabilities = [
   },
   {
     category: 'Services',
-    items: ['Scan 3D', 'Modélisation CAO', 'Prototypage rapide', 'Conseil technique'],
+    items: ['Scan 3D', 'Modélisation CAO', 'Prototypage', 'Conseil technique'],
   },
 ]
 
@@ -90,16 +95,14 @@ export default function QuiSommesNousPage() {
                 </p>
               </div>
             </div>
-            <div className="bg-gradient-to-br from-secondary-100 to-secondary-200 rounded-2xl aspect-square flex items-center justify-center">
-              <div className="text-center p-8">
-                <div className="w-24 h-24 mx-auto mb-6 bg-primary-100 rounded-2xl flex items-center justify-center">
-                  <svg className="w-12 h-12 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
-                  </svg>
-                </div>
-                <p className="text-lg font-semibold text-secondary-700">L'atelier Inphenix</p>
-                <p className="text-secondary-500 mt-2">Créativité & Technologie</p>
-              </div>
+            <div className="relative rounded-2xl overflow-hidden aspect-square">
+              <Image
+                src="/images/atelier/bureau-1.jpeg"
+                alt="L'atelier Inphenix System"
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
             </div>
           </div>
         </div>
@@ -131,7 +134,7 @@ export default function QuiSommesNousPage() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {values.map((value) => (
               <div key={value.title} className="bg-white rounded-2xl p-8 text-center">
                 <h3 className="text-xl font-semibold text-secondary-900 mb-3">{value.title}</h3>
@@ -192,7 +195,7 @@ export default function QuiSommesNousPage() {
                   </svg>
                 ))}
               </div>
-              <span className="text-white font-semibold">4.9/5 de satisfaction</span>
+              <span className="text-white font-semibold">5/5 sur Google</span>
             </div>
           </div>
         </div>
