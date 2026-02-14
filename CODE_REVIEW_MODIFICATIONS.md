@@ -392,9 +392,7 @@ const handleImageError = useCallback((logoPath: string) => {
 ## 🛡️ Cloudflare Turnstile (Anti-spam/Anti-bot)
 
 ### Configuration
-**Clés fournies par l'utilisateur:**
-- **Site Key (public):** `0x4AAAAAACb8HY0IgDx5Ug47`
-- **Secret Key (privée):** `0x4AAAAAACb8HSjh-XaUvLtlJ78V_-ohh04`
+**Clés configurées via variables d'environnement (voir .env.example)**
 
 ### Frontend - contact/page.tsx
 
@@ -551,29 +549,7 @@ export async function POST(request: Request) {
 
 ### Variables d'environnement
 
-**.env.local**
-```env
-# Resend API Key
-RESEND_API_KEY=
-
-# Cloudflare Turnstile
-NEXT_PUBLIC_TURNSTILE_SITE_KEY=0x4AAAAAACb8HY0IgDx5Ug47
-CLOUDFLARE_TURNSTILE_SECRET_KEY=0x4AAAAAACb8HSjh-XaUvLtlJ78V_-ohh04
-```
-
-**.env.example**
-```env
-# Resend API Key
-# Get your API key from: https://resend.com/api-keys
-RESEND_API_KEY=
-
-# Cloudflare Turnstile (Anti-spam)
-# Get your keys from: https://dash.cloudflare.com/
-# Site Key (publique - visible dans le code frontend)
-NEXT_PUBLIC_TURNSTILE_SITE_KEY=your_site_key_here
-# Secret Key (privée - serveur uniquement, NEVER commit this!)
-CLOUDFLARE_TURNSTILE_SECRET_KEY=your_secret_key_here
-```
+**Voir `.env.example` pour la liste des variables requises.**
 
 **Bénéfices:**
 - ✅ Protection gratuite contre bots et spam
@@ -662,9 +638,9 @@ npm install --save-dev @types/dompurify
 
 | Variable | Valeur | Environment |
 |----------|--------|-------------|
-| `RESEND_API_KEY` | `[Votre clé Resend]` | Production, Preview, Development |
-| `NEXT_PUBLIC_TURNSTILE_SITE_KEY` | `0x4AAAAAACb8HY0IgDx5Ug47` | Production, Preview, Development |
-| `CLOUDFLARE_TURNSTILE_SECRET_KEY` | `0x4AAAAAACb8HSjh-XaUvLtlJ78V_-ohh04` | Production, Preview, Development |
+| `RESEND_API_KEY` | *(voir .env.local)* | Production, Preview, Development |
+| `NEXT_PUBLIC_TURNSTILE_SITE_KEY` | *(voir .env.local)* | Production, Preview, Development |
+| `CLOUDFLARE_TURNSTILE_SECRET_KEY` | *(voir .env.local)* | Production, Preview, Development |
 
 ⚠️ **Important:** Après ajout des variables, redéployer l'application.
 
