@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
@@ -27,10 +27,42 @@ export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [servicesOpen, setServicesOpen] = useState(false)
   const [secteursOpen, setSecteursOpen] = useState(false)
+  const [isVisible, setIsVisible] = useState(true)
+  const [lastScrollY, setLastScrollY] = useState(0)
   const pathname = usePathname()
 
+  useEffect(() => {
+    const handleScroll = () => {
+      // Auto-hide uniquement sur la page réalisations
+      if (pathname !== '/realisations') {
+        setIsVisible(true)
+        return
+      }
+
+      const currentScrollY = window.scrollY
+
+      if (currentScrollY < 50) {
+        // Toujours visible en haut de page
+        setIsVisible(true)
+      } else if (currentScrollY > lastScrollY) {
+        // Scroll vers le bas - cacher
+        setIsVisible(false)
+      } else {
+        // Scroll vers le haut - montrer
+        setIsVisible(true)
+      }
+
+      setLastScrollY(currentScrollY)
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [lastScrollY, pathname])
+
   return (
-    <header className="bg-white border-b border-secondary-100 sticky top-0 z-50">
+    <header className={`bg-white border-b border-secondary-200 sticky top-0 z-50 transition-transform duration-300 ${
+      isVisible ? 'translate-y-0' : '-translate-y-full'
+    }`}>
       <nav className="container-custom" aria-label="Navigation principale">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}

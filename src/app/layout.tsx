@@ -60,7 +60,7 @@ export default function RootLayout({
         {/* Tarteaucitron - Gestion des cookies RGPD */}
         <Script
           src="https://cdn.jsdelivr.net/npm/tarteaucitronjs@1.17.0/tarteaucitron.min.js"
-          strategy="beforeInteractive"
+          strategy="afterInteractive"
         />
         <Script id="tarteaucitron-init" strategy="afterInteractive">
           {`

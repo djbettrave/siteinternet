@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 
 const faqs = [
   {
@@ -30,10 +30,10 @@ const faqs = [
 ]
 
 export default function FAQ() {
-  const [openIndex, setOpenIndex] = useState<number | null>(0)
+  const [openIndex, setOpenIndex] = useState<number | null>(null)
 
-  // Schema markup for FAQ
-  const faqSchema = {
+  // Schema markup for FAQ - memoized to avoid recalculation on each render
+  const faqSchema = useMemo(() => ({
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
     mainEntity: faqs.map((faq) => ({
@@ -44,7 +44,7 @@ export default function FAQ() {
         text: faq.answer,
       },
     })),
-  }
+  }), [])
 
   return (
     <section className="py-24 bg-white">
@@ -59,10 +59,6 @@ export default function FAQ() {
           {/* Header */}
           <div className="text-center mb-12">
             <h2 className="section-title">Questions fréquentes</h2>
-            <p className="section-subtitle mx-auto">
-              Tout ce que vous devez savoir sur nos services.
-              Une question ? Contactez-nous.
-            </p>
           </div>
 
           {/* FAQ Items */}

@@ -1,0 +1,9 @@
+export interface ProjectImage {
+  id: string
+  filename: string
+  path: string
+  status: 'completed' | 'process'
+  title: string
+  services: string[]
+  objectPosition: string
+}

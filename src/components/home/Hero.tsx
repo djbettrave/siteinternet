@@ -2,18 +2,12 @@ import Link from 'next/link'
 
 export default function Hero() {
   return (
-    <section className="relative bg-gradient-to-br from-secondary-900 via-secondary-800 to-primary-900 overflow-hidden">
+    <section className="relative bg-gradient-to-br from-secondary-900 via-secondary-800 to-primary-900 overflow-hidden min-h-[calc(100vh-5rem)]">
       <div className="container-custom relative">
-        <div className="py-24 lg:py-32">
+        <div className="pt-16 pb-12 lg:pt-20 lg:pb-16">
           <div className="max-w-3xl">
-            {/* Badge */}
-            <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-4 py-2 mb-8">
-              <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
-              <span className="text-white/90 text-sm font-medium">Réponse sous 24h garantie</span>
-            </div>
-
             {/* Headline */}
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6 mt-8">
               Créativité &{' '}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-300 to-primary-500">
                 Technologie
@@ -22,26 +16,31 @@ export default function Hero() {
             </h1>
 
             {/* Subheadline */}
-            <p className="text-xl text-secondary-300 mb-8 max-w-2xl">
-              Bureau d'étude spécialisé en impression 3D et développement électronique.
-              Du prototype à la série, nous transformons vos idées en réalité.
+            <p className="text-xl text-secondary-300 mb-8">
+              <span className="block whitespace-nowrap">Bureau d'étude spécialisé en impression 3D et développement électronique.</span>
+              <span className="block whitespace-nowrap">Du prototype à la série, nous transformons vos idées en réalité.</span>
             </p>
 
             {/* CTAs */}
             <div className="flex flex-col sm:flex-row gap-4">
-              <Link href="/contact" className="btn-primary text-lg px-8 py-4">
-                Demander un devis gratuit
-                <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              <a
+                href="https://impression3d.inphenix-system.fr"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-primary text-lg px-8 py-4"
+              >
+                Devis d'impression 3D instantané
+                <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                 </svg>
-              </Link>
+              </a>
               <Link href="/realisations" className="btn-outline border-white/30 text-white hover:bg-white/10 text-lg px-8 py-4">
                 Voir nos réalisations
               </Link>
             </div>
 
             {/* Trust Indicators */}
-            <div className="flex flex-wrap items-center gap-4 lg:gap-6 mt-12 pt-8 border-t border-white/10">
+            <div className="flex flex-wrap items-center gap-4 lg:gap-6 mt-8 pt-8 border-t border-white/10">
               <div className="flex items-center gap-2">
                 <div className="flex -space-x-1">
                   {[1, 2, 3, 4, 5].map((i) => (

@@ -34,7 +34,7 @@ export interface ServiceData {
     title: string
     description: string
   }
-  relatedServices: {
+  relatedServices?: {
     name: string
     href: string
   }[]
@@ -104,24 +104,35 @@ export default function ServicePage({ service }: ServicePageProps) {
               </nav>
 
               <h1 className="text-4xl md:text-5xl font-bold text-white leading-tight mb-6">
-                {service.headline}
+                {service.headline.split('\n').map((line, index) => (
+                  <span key={index} className="block whitespace-nowrap">
+                    {line}
+                  </span>
+                ))}
               </h1>
 
               <p className="text-xl text-secondary-300 mb-8 max-w-2xl">
-                {service.subheadline}
+                {service.subheadline.split('. ').map((sentence, index, array) => (
+                  <span key={index} className="block whitespace-nowrap">
+                    {sentence}{index < array.length - 1 ? '.' : sentence.endsWith('.') ? '' : '.'}
+                  </span>
+                ))}
               </p>
 
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Link href="/contact" className="btn-primary text-lg px-8 py-4">
-                  Demander un devis
-                  <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              {/* CTA uniquement pour FDM et Résine */}
+              {(service.slug === 'impression-3d-fdm' || service.slug === 'impression-3d-resine') && (
+                <a
+                  href="https://impression3d.inphenix-system.fr"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-primary text-lg px-8 py-4 inline-flex items-center"
+                >
+                  Devis instantané Impression 3D
+                  <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                   </svg>
-                </Link>
-                <Link href="/realisations" className="btn-outline border-white/30 text-white hover:bg-white/10 text-lg px-8 py-4">
-                  Voir des exemples
-                </Link>
-              </div>
+                </a>
+              )}
             </div>
           </div>
         </div>
@@ -267,27 +278,6 @@ export default function ServicePage({ service }: ServicePageProps) {
         </div>
       </section>
 
-      {/* Related Services */}
-      <section className="py-24 bg-white">
-        <div className="container-custom">
-          <h2 className="text-2xl font-bold text-secondary-900 mb-8">Services complémentaires</h2>
-          <div className="grid md:grid-cols-3 gap-6">
-            {service.relatedServices.map((related) => (
-              <Link
-                key={related.href}
-                href={related.href}
-                className="card p-6 hover:border-primary-200 transition-colors group"
-              >
-                <span className="font-semibold text-secondary-900 group-hover:text-primary-600 transition-colors">{related.name}</span>
-                <svg className="w-5 h-5 text-secondary-400 mt-2 group-hover:text-primary-600 group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* CTA */}
       <section className="py-24 bg-primary-600">
         <div className="container-custom">
@@ -299,7 +289,7 @@ export default function ServicePage({ service }: ServicePageProps) {
               {service.cta.description}
             </p>
             <Link href="/contact" className="bg-white text-primary-600 hover:bg-primary-50 px-8 py-4 rounded-lg font-semibold text-lg transition-colors inline-block">
-              Demander un devis gratuit
+              Nous contacter
             </Link>
           </div>
         </div>

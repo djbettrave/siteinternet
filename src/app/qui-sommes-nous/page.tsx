@@ -11,22 +11,27 @@ const values = [
   {
     title: 'Expertise technique',
     description: 'Une maîtrise approfondie de l\'impression 3D et de l\'électronique, constamment mise à jour avec les dernières technologies.',
+    icon: 'M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z', // Ampoule (idée/expertise)
   },
   {
     title: 'Réactivité',
     description: 'Réponse sous 24h garantie. Nous comprenons l\'importance des délais dans vos projets.',
+    icon: 'M13 10V3L4 14h7v7l9-11h-7z', // Éclair (rapidité)
   },
   {
     title: 'Sur mesure',
     description: 'Chaque projet est unique. Nous adaptons nos solutions à vos besoins spécifiques.',
+    icon: 'M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4', // Sliders (personnalisation)
   },
   {
     title: 'Qualité',
     description: 'Contrôle qualité rigoureux sur chaque pièce. Nous ne livrons que ce dont nous sommes fiers.',
+    icon: 'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z', // Badge check (qualité)
   },
   {
     title: '🇫🇷 Made in France',
     description: 'Atelier basé à Suresnes. Fabrication locale, savoir-faire français, réactivité et proximité garanties.',
+    icon: 'M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z M15 11a3 3 0 11-6 0 3 3 0 016 0z', // Map pin (localisation)
   },
 ]
 
@@ -136,7 +141,12 @@ export default function QuiSommesNousPage() {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {values.map((value) => (
-              <div key={value.title} className="bg-white rounded-2xl p-8 text-center">
+              <div key={value.title} className="bg-white rounded-2xl p-8 text-center border border-secondary-200 hover:border-primary-300 transition-colors">
+                {value.icon && (
+                  <svg className="w-12 h-12 mx-auto mb-4 text-secondary-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={value.icon} />
+                  </svg>
+                )}
                 <h3 className="text-xl font-semibold text-secondary-900 mb-3">{value.title}</h3>
                 <p className="text-secondary-600">{value.description}</p>
               </div>

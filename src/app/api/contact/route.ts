@@ -1,5 +1,6 @@
 import { Resend } from 'resend'
 import { NextRequest, NextResponse } from 'next/server'
+import { resolveMx, resolve4 } from 'dns/promises'
 
 // Rate limiting simple en mémoire
 const rateLimitMap = new Map<string, { count: number; lastReset: number }>()
@@ -38,6 +39,22 @@ function isValidEmail(email: string): boolean {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
 }
 
+// Vérification DNS du domaine email (MX ou A record en fallback)
+async function hasValidEmailDomain(email: string): Promise<boolean> {
+  try {
+    const domain = email.split('@')[1]
+    if (!domain) return false
+    // Essayer MX d'abord
+    const mxRecords = await resolveMx(domain).catch(() => [])
+    if (mxRecords.length > 0) return true
+    // Fallback : un A record suffit (RFC 5321)
+    const aRecords = await resolve4(domain).catch(() => [])
+    return aRecords.length > 0
+  } catch {
+    return false
+  }
+}
+
 export async function POST(request: NextRequest) {
   try {
     // Rate limiting
@@ -57,7 +74,47 @@ export async function POST(request: NextRequest) {
     }
 
     const body = await request.json()
-    const { name, email, company, phone, service, sector, message } = body
+    const { name, email, company, phone, service, sector, message, turnstileToken } = body
+
+    // Vérification Turnstile (anti-spam)
+    if (!turnstileToken || typeof turnstileToken !== 'string') {
+      return NextResponse.json(
+        { success: false, message: 'Veuillez valider le captcha anti-spam.' },
+        { status: 400 }
+      )
+    }
+
+    // Vérifier le token Turnstile côté serveur
+    const turnstileSecret = process.env.CLOUDFLARE_TURNSTILE_SECRET_KEY
+    if (!turnstileSecret) {
+      console.error('Cloudflare Turnstile secret key not configured')
+      return NextResponse.json(
+        { success: false, message: 'Configuration serveur incorrecte' },
+        { status: 500 }
+      )
+    }
+
+    const turnstileResponse = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        secret: turnstileSecret,
+        response: turnstileToken,
+        remoteip: ip,
+      }),
+    })
+
+    const turnstileData = await turnstileResponse.json()
+
+    if (!turnstileData.success) {
+      console.error('Turnstile verification failed:', turnstileData)
+      return NextResponse.json(
+        { success: false, message: 'Échec de la vérification anti-spam. Veuillez réessayer.' },
+        { status: 403 }
+      )
+    }
 
     // Validation des champs requis
     if (!name || typeof name !== 'string' || name.trim().length === 0) {
@@ -72,6 +129,12 @@ export async function POST(request: NextRequest) {
         { success: false, message: 'Email invalide' },
         { status: 400 }
       )
+    }
+
+    // Vérifier le domaine email (non bloquant - log seulement)
+    const emailHasValidDomain = await hasValidEmailDomain(email)
+    if (!emailHasValidDomain) {
+      console.warn(`Domaine email suspect (pas de MX/A record) : ${email.split('@')[1]}`)
     }
 
     if (!message || typeof message !== 'string' || message.trim().length === 0) {

@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import Image from 'next/image'
 import type { Metadata } from 'next'
 
 export interface SectorData {
@@ -16,7 +15,7 @@ export interface SectorData {
     icon?: string
   }[]
   benefits: string[]
-  services: {
+  services?: {
     name: string
     href: string
   }[]
@@ -101,18 +100,8 @@ export default function SectorPage({ sector }: SectorPageProps) {
 
       {/* Hero Section */}
       <section className="relative bg-gradient-to-br from-secondary-900 via-secondary-800 to-primary-900 overflow-hidden">
-        {sector.heroImage && (
-          <Image
-            src={sector.heroImage}
-            alt={`Projet Inphenix System pour le secteur ${sector.name}`}
-            fill
-            className="object-cover opacity-20"
-            sizes="100vw"
-            priority
-          />
-        )}
         <div className="container-custom relative">
-          <div className="py-20 lg:py-28">
+          <div className="py-12 lg:py-16">
             <div className="max-w-3xl">
               {/* Breadcrumb */}
               <nav className="flex items-center gap-2 text-sm text-secondary-400 mb-8">
@@ -132,26 +121,21 @@ export default function SectorPage({ sector }: SectorPageProps) {
 
               {/* Headline */}
               <h1 className="text-4xl md:text-5xl font-bold text-white leading-tight mb-6">
-                {sector.headline}
+                {sector.headline.split('\n').map((line, index) => (
+                  <span key={index} className="block whitespace-nowrap">
+                    {line}
+                  </span>
+                ))}
               </h1>
 
               {/* Subheadline */}
               <p className="text-xl text-secondary-300 mb-8 max-w-2xl">
-                {sector.subheadline}
+                {sector.subheadline.split('. ').map((sentence, index, array) => (
+                  <span key={index} className="block whitespace-nowrap">
+                    {sentence}{index < array.length - 1 ? '.' : sentence.endsWith('.') ? '' : '.'}
+                  </span>
+                ))}
               </p>
-
-              {/* CTAs */}
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Link href="/contact" className="btn-primary text-lg px-8 py-4">
-                  Devis {sector.name}
-                  <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                  </svg>
-                </Link>
-                <Link href="/realisations" className="btn-outline border-white/30 text-white hover:bg-white/10 text-lg px-8 py-4">
-                  Voir nos projets {sector.name}
-                </Link>
-              </div>
 
               {/* Stats */}
               {sector.stats && (
@@ -202,43 +186,24 @@ export default function SectorPage({ sector }: SectorPageProps) {
       {/* Benefits Section */}
       <section className="py-24 bg-secondary-50">
         <div className="container-custom">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <div>
-              <h2 className="section-title mb-6">
-                Pourquoi choisir Inphenix pour vos projets {sector.name} ?
-              </h2>
-              <p className="text-lg text-secondary-600 mb-8">
-                Notre expertise combinée en impression 3D et électronique nous permet de répondre
-                aux exigences spécifiques du secteur {sector.name.toLowerCase()}.
-              </p>
-              <ul className="space-y-4">
-                {sector.benefits.map((benefit, index) => (
-                  <li key={index} className="flex items-start gap-3">
-                    <svg className="w-6 h-6 text-green-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                    </svg>
-                    <span className="text-secondary-700">{benefit}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div className="bg-white rounded-2xl p-8 shadow-sm border border-secondary-100">
-              <h3 className="font-semibold text-lg mb-6">Services adaptés au {sector.name}</h3>
-              <div className="space-y-3">
-                {sector.services.map((service) => (
-                  <Link
-                    key={service.href}
-                    href={service.href}
-                    className="flex items-center justify-between p-4 bg-secondary-50 rounded-lg hover:bg-primary-50 transition-colors group"
-                  >
-                    <span className="font-medium text-secondary-900">{service.name}</span>
-                    <svg className="w-5 h-5 text-secondary-400 group-hover:text-primary-600 group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                    </svg>
-                  </Link>
-                ))}
-              </div>
-            </div>
+          <div className="max-w-4xl mx-auto">
+            <h2 className="section-title mb-6">
+              Pourquoi choisir Inphenix pour vos projets {sector.name} ?
+            </h2>
+            <p className="text-lg text-secondary-600 mb-8">
+              Notre expertise combinée en impression 3D et électronique nous permet de répondre
+              aux exigences spécifiques du secteur {sector.name.toLowerCase()}.
+            </p>
+            <ul className="space-y-4">
+              {sector.benefits.map((benefit, index) => (
+                <li key={index} className="flex items-start gap-3">
+                  <svg className="w-6 h-6 text-green-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                  </svg>
+                  <span className="text-secondary-700">{benefit}</span>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </section>
@@ -284,16 +249,16 @@ export default function SectorPage({ sector }: SectorPageProps) {
               {sector.cta.description}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/contact" className="bg-white text-primary-600 hover:bg-primary-50 px-8 py-4 rounded-lg font-semibold text-lg transition-colors">
-                Demander un devis gratuit
+              <Link href="/contact" className="bg-white text-primary-600 hover:bg-primary-50 px-8 py-4 rounded-lg font-semibold text-lg transition-colors whitespace-nowrap">
+                Nous contacter
               </Link>
               <a
                 href="https://impression3d.inphenix-system.fr"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-primary-700 text-white hover:bg-primary-800 px-8 py-4 rounded-lg font-semibold text-lg transition-colors flex items-center justify-center gap-2"
+                className="bg-primary-700 text-white hover:bg-primary-800 px-8 py-4 rounded-lg font-semibold text-lg transition-colors flex items-center justify-center gap-2 whitespace-nowrap"
               >
-                Devis instantané impression 3D
+                Devis instantané Impression 3D
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                 </svg>

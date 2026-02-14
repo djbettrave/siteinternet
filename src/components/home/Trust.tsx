@@ -1,6 +1,6 @@
 'use client'
 
-import { useCallback } from 'react'
+import { useCallback, useState } from 'react'
 import useEmblaCarousel from 'embla-carousel-react'
 import Image from 'next/image'
 
@@ -36,9 +36,15 @@ export default function Trust() {
     { loop: true, align: 'start', slidesToScroll: 3 },
     []
   )
+  const [imageErrors, setImageErrors] = useState<Set<string>>(new Set())
 
   const scrollPrev = useCallback(() => brandsApi?.scrollPrev(), [brandsApi])
   const scrollNext = useCallback(() => brandsApi?.scrollNext(), [brandsApi])
+
+  const handleImageError = useCallback((logoPath: string) => {
+    console.error(`Failed to load image: ${logoPath}`)
+    setImageErrors(prev => new Set(prev).add(logoPath))
+  }, [])
 
   return (
     <section className="py-24 bg-secondary-50">
@@ -80,13 +86,20 @@ export default function Trust() {
                   className="flex-none w-1/4 md:w-1/5 lg:w-[11.11%] px-2"
                 >
                   <div className="flex items-center justify-center h-14 bg-white rounded-lg border border-secondary-200 grayscale hover:grayscale-0 opacity-60 hover:opacity-100 transition-all duration-300 cursor-pointer px-3">
-                    <Image
-                      src={brand.logo}
-                      alt={brand.name}
-                      width={brand.width}
-                      height={32}
-                      className="object-contain max-h-8"
-                    />
+                    {imageErrors.has(brand.logo) ? (
+                      <svg className="w-8 h-8 text-secondary-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                      </svg>
+                    ) : (
+                      <Image
+                        src={brand.logo}
+                        alt={brand.name}
+                        width={brand.width}
+                        height={32}
+                        className="object-contain max-h-8"
+                        onError={() => handleImageError(brand.logo)}
+                      />
+                    )}
                   </div>
                 </div>
               ))}
@@ -110,13 +123,20 @@ export default function Trust() {
                 key={partner.name}
                 className="flex items-center justify-center h-14 w-36 bg-white rounded-lg border border-secondary-200 grayscale hover:grayscale-0 opacity-60 hover:opacity-100 transition-all duration-300 cursor-pointer px-3"
               >
-                <Image
-                  src={partner.logo}
-                  alt={partner.name}
-                  width={90}
-                  height={32}
-                  className="object-contain max-h-8"
-                />
+                {imageErrors.has(partner.logo) ? (
+                  <svg className="w-8 h-8 text-secondary-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                  </svg>
+                ) : (
+                  <Image
+                    src={partner.logo}
+                    alt={partner.name}
+                    width={90}
+                    height={32}
+                    className="object-contain max-h-8"
+                    onError={() => handleImageError(partner.logo)}
+                  />
+                )}
               </div>
             ))}
           </div>

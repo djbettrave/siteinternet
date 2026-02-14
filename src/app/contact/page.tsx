@@ -1,7 +1,27 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
+import Script from 'next/script'
 import Link from 'next/link'
+import { CONTACT_INFO } from '@/data/contact'
+
+// Déclarer le type global pour Turnstile
+declare global {
+  interface Window {
+    turnstile?: {
+      render: (element: HTMLElement, options: {
+        sitekey: string
+        callback: (token: string) => void
+        'error-callback'?: () => void
+        'expired-callback'?: () => void
+        theme?: 'light' | 'dark' | 'auto'
+        size?: 'normal' | 'compact'
+      }) => string
+      reset: (widgetId: string) => void
+      remove: (widgetId: string) => void
+    }
+  }
+}
 
 const services = [
   'Impression 3D FDM',
@@ -34,10 +54,53 @@ export default function ContactPage() {
     message: '',
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitStatus, setSubmitStatus] = useState<{ type: 'success' | 'error'; message: string } | null>(null)
+  const [turnstileToken, setTurnstileToken] = useState<string>('')
+  const [turnstileLoaded, setTurnstileLoaded] = useState(false)
+  const turnstileRef = useRef<HTMLDivElement>(null)
+  const widgetIdRef = useRef<string | null>(null)
+
+  // Initialiser Turnstile quand le script est chargé
+  useEffect(() => {
+    if (turnstileLoaded && turnstileRef.current && window.turnstile && !widgetIdRef.current) {
+      widgetIdRef.current = window.turnstile.render(turnstileRef.current, {
+        sitekey: process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || '',
+        callback: (token: string) => {
+          setTurnstileToken(token)
+        },
+        'error-callback': () => {
+          setTurnstileToken('')
+        },
+        'expired-callback': () => {
+          setTurnstileToken('')
+        },
+        theme: 'light',
+        size: 'normal',
+      })
+    }
+
+    return () => {
+      if (widgetIdRef.current && window.turnstile) {
+        window.turnstile.remove(widgetIdRef.current)
+        widgetIdRef.current = null
+      }
+    }
+  }, [turnstileLoaded])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
+    setSubmitStatus(null)
+
+    // Vérifier que Turnstile est validé
+    if (!turnstileToken) {
+      setSubmitStatus({
+        type: 'error',
+        message: 'Veuillez valider le captcha anti-spam.',
+      })
+      setIsSubmitting(false)
+      return
+    }
 
     try {
       const response = await fetch('/api/contact', {
@@ -46,13 +109,8 @@ export default function ContactPage() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          company: formData.company,
-          phone: formData.phone,
-          service: formData.service,
-          sector: formData.sector,
-          message: formData.message,
+          ...formData,
+          turnstileToken
         }),
       })
 
@@ -66,13 +124,27 @@ export default function ContactPage() {
           sector: '',
           message: '',
         })
-        alert('Merci pour votre message ! Nous vous répondrons sous 24h.')
+        setSubmitStatus({
+          type: 'success',
+          message: 'Merci pour votre message ! Nous vous répondrons sous 24h.',
+        })
+        // Réinitialiser Turnstile
+        setTurnstileToken('')
+        if (widgetIdRef.current && window.turnstile) {
+          window.turnstile.reset(widgetIdRef.current)
+        }
       } else {
-        alert('Une erreur est survenue. Veuillez réessayer ou nous contacter directement par email.')
+        const data = await response.json().catch(() => null)
+        setSubmitStatus({
+          type: 'error',
+          message: data?.message || 'Une erreur est survenue. Veuillez réessayer ou nous contacter directement par email.',
+        })
       }
-    } catch (error) {
-      console.error('Erreur lors de l\'envoi:', error)
-      alert('Une erreur est survenue. Veuillez réessayer ou nous contacter directement par email.')
+    } catch {
+      setSubmitStatus({
+        type: 'error',
+        message: 'Impossible de contacter le serveur. Vérifiez votre connexion ou contactez-nous directement par email.',
+      })
     } finally {
       setIsSubmitting(false)
     }
@@ -80,23 +152,15 @@ export default function ContactPage() {
 
   return (
     <>
-      {/* Hero */}
-      <section className="bg-gradient-to-br from-secondary-900 to-secondary-800 py-20">
-        <div className="container-custom">
-          <div className="max-w-3xl">
-            <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
-              Contactez-nous
-            </h1>
-            <p className="text-xl text-secondary-300">
-              Un projet en tête ? Une question ? Remplissez le formulaire
-              ou utilisez nos coordonnées directes. Réponse garantie sous 24h.
-            </p>
-          </div>
-        </div>
-      </section>
+      {/* Script Cloudflare Turnstile */}
+      <Script
+        src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+        onLoad={() => setTurnstileLoaded(true)}
+        strategy="afterInteractive"
+      />
 
       {/* Contact Section */}
-      <section className="py-24 bg-white">
+      <section className="pt-16 pb-24 bg-white">
         <div className="container-custom">
           <div className="grid lg:grid-cols-3 gap-16">
             {/* Contact Info */}
@@ -112,8 +176,22 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <h3 className="font-semibold text-secondary-900 mb-1">Email</h3>
-                    <a href="mailto:contact@inphenix-system.fr" className="text-primary-600 hover:text-primary-700">
-                      contact@inphenix-system.fr
+                    <a href={CONTACT_INFO.emailHref} className="text-primary-600 hover:text-primary-700">
+                      {CONTACT_INFO.email}
+                    </a>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 bg-primary-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                    <svg className="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-secondary-900 mb-1">Téléphone</h3>
+                    <a href={CONTACT_INFO.phoneHref} aria-label={`Appeler Inphenix System au ${CONTACT_INFO.phone}`} className="text-primary-600 hover:text-primary-700">
+                      {CONTACT_INFO.phone}
                     </a>
                   </div>
                 </div>
@@ -128,8 +206,8 @@ export default function ContactPage() {
                   <div>
                     <h3 className="font-semibold text-secondary-900 mb-1">Adresse</h3>
                     <p className="text-secondary-600">
-                      23 rue Édouard-Nieuport<br />
-                      92150 Suresnes, France
+                      {CONTACT_INFO.address}<br />
+                      {CONTACT_INFO.city}
                     </p>
                   </div>
                 </div>
@@ -147,8 +225,29 @@ export default function ContactPage() {
                 </div>
               </div>
 
+              {/* Devis Instantané Box */}
+              <div className="mt-12 bg-secondary-100/85 rounded-2xl p-12 border border-secondary-200/60 min-h-[190px] flex flex-col items-center justify-center text-center">
+                <svg className="w-16 h-16 text-primary-600 mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+                <p className="font-bold text-secondary-900 mb-6 text-lg">
+                  Vous avez un fichier 3D ?
+                </p>
+                <a
+                  href={CONTACT_INFO.devisUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-primary-600 font-semibold hover:text-primary-700 transition-colors text-base"
+                >
+                  Obtenez un devis instantané
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                  </svg>
+                </a>
+              </div>
+
               {/* Engagement Box */}
-              <div className="mt-12 bg-secondary-50 rounded-2xl p-6">
+              <div className="mt-8 bg-secondary-100/85 rounded-2xl p-4 border border-secondary-200/60">
                 <h3 className="font-semibold text-secondary-900 mb-4">Notre engagement</h3>
                 <ul className="space-y-3">
                   {[
@@ -166,29 +265,11 @@ export default function ContactPage() {
                   ))}
                 </ul>
               </div>
-
-              {/* Devis Online Link */}
-              <div className="mt-8">
-                <p className="text-secondary-600 mb-4">
-                  Vous avez un fichier 3D prêt ?
-                </p>
-                <a
-                  href="https://impression3d.inphenix-system.fr"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-primary-600 font-medium hover:text-primary-700"
-                >
-                  Obtenez un devis instantané
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                  </svg>
-                </a>
-              </div>
             </div>
 
             {/* Contact Form */}
             <div className="lg:col-span-2">
-              <div className="bg-secondary-50 rounded-2xl p-8 lg:p-12">
+              <div className="bg-secondary-100/85 rounded-2xl p-8 lg:p-12 border border-secondary-200/60">
                 <h2 className="text-2xl font-bold text-secondary-900 mb-8">Décrivez votre projet</h2>
 
                 <form onSubmit={handleSubmit} className="space-y-6">
@@ -246,8 +327,10 @@ export default function ContactPage() {
                         id="phone"
                         value={formData.phone}
                         onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                        pattern="^[\+]?[(]?[0-9]{1,4}[)]?[-\s\.]?[(]?[0-9]{1,4}[)]?[-\s\.]?[0-9]{1,5}[-\s\.]?[0-9]{1,5}$"
+                        title="Format attendu : 06 12 34 56 78, +33 6 12 34 56 78, ou tout format international"
                         className="w-full px-4 py-3 border border-secondary-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                        placeholder="06 00 00 00 00"
+                        placeholder="06 00 00 00 00 ou +33 6 00 00 00 00"
                       />
                     </div>
                   </div>
@@ -294,7 +377,7 @@ export default function ContactPage() {
                     <textarea
                       id="message"
                       required
-                      rows={6}
+                      rows={8}
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                       className="w-full px-4 py-3 border border-secondary-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent resize-none"
@@ -319,15 +402,38 @@ export default function ContactPage() {
                     </label>
                   </div>
 
+                  {/* Widget Turnstile anti-spam */}
+                  <div ref={turnstileRef} className="flex justify-center"></div>
+
+                  {submitStatus && (
+                    <div
+                      role="alert"
+                      className={`p-4 rounded-lg text-sm ${
+                        submitStatus.type === 'success'
+                          ? 'bg-green-50 text-green-800 border border-green-200'
+                          : 'bg-red-50 text-red-800 border border-red-200'
+                      }`}
+                    >
+                      {submitStatus.message}
+                    </div>
+                  )}
+
                   <button
                     type="submit"
                     disabled={isSubmitting}
                     className="btn-primary w-full text-lg py-4 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     {isSubmitting ? 'Envoi en cours...' : 'Envoyer ma demande'}
-                    <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                    </svg>
+                    {isSubmitting ? (
+                      <svg className="w-5 h-5 ml-2 animate-spin" fill="none" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                      </svg>
+                    ) : (
+                      <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                      </svg>
+                    )}
                   </button>
                 </form>
               </div>

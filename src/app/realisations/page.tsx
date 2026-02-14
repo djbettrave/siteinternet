@@ -24,20 +24,55 @@ export default function RealisationsPage() {
   const [selectedStatus, setSelectedStatus] = useState<FilterStatus>('completed')
   const [lightboxOpen, setLightboxOpen] = useState(false)
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
+  const [isHeaderVisible, setIsHeaderVisible] = useState(true)
+  const [lastScrollY, setLastScrollY] = useState(0)
 
   useEffect(() => {
-    // Charger les projets depuis l'API
-    fetch('/api/projects')
+    // Charger les projets depuis l'API avec timeout
+    const controller = new AbortController()
+    const timeout = setTimeout(() => controller.abort(), 10000) // 10s timeout
+
+    fetch('/api/projects', { signal: controller.signal })
       .then(res => res.json())
       .then(data => {
         setProjects(data.projects || [])
         setLoading(false)
       })
       .catch(error => {
-        console.error('Erreur lors du chargement des projets:', error)
+        if (error.name === 'AbortError') {
+          console.error('Timeout lors du chargement des projets')
+        } else {
+          console.error('Erreur lors du chargement des projets:', error)
+        }
         setLoading(false)
       })
+      .finally(() => clearTimeout(timeout))
+
+    return () => {
+      clearTimeout(timeout)
+      controller.abort()
+    }
   }, [])
+
+  // Détecter la direction du scroll pour ajuster la position de la barre de filtres
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY
+
+      if (currentScrollY < 50) {
+        setIsHeaderVisible(true)
+      } else if (currentScrollY > lastScrollY) {
+        setIsHeaderVisible(false)
+      } else {
+        setIsHeaderVisible(true)
+      }
+
+      setLastScrollY(currentScrollY)
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [lastScrollY])
 
   const filteredProjects = projects.filter((project) => {
     if (selectedStatus === 'all') return true
@@ -49,11 +84,8 @@ export default function RealisationsPage() {
     // Ne pas scroller au premier chargement
     if (projects.length === 0) return
 
-    // Scroller vers la section des projets
-    const projectsSection = document.querySelector('#projects-section')
-    if (projectsSection) {
-      projectsSection.scrollIntoView({ behavior: 'smooth', block: 'start' })
-    }
+    // Scroller vers le haut de la page
+    window.scrollTo({ top: 0, behavior: 'smooth' })
   }, [selectedStatus, projects.length])
 
   const closeLightbox = useCallback(() => {
@@ -61,11 +93,25 @@ export default function RealisationsPage() {
     document.body.style.overflow = ''
   }, [])
 
-  const openLightbox = (index: number) => {
+  const openLightbox = useCallback((index: number) => {
     setCurrentImageIndex(index)
     setLightboxOpen(true)
     document.body.style.overflow = 'hidden'
-  }
+  }, [])
+
+  // Cleanup scroll on unmount or lightbox close
+  useEffect(() => {
+    if (lightboxOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = ''
+    }
+
+    // Cleanup on component unmount
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [lightboxOpen])
 
   // Gestion du clavier pour le lightbox
   useEffect(() => {
@@ -92,49 +138,49 @@ export default function RealisationsPage() {
 
   return (
     <>
-      {/* Hero */}
-      <section className="bg-gradient-to-br from-secondary-900 to-secondary-800 py-20">
-        <div className="container-custom">
-          <div className="max-w-3xl">
-            <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
-              Nos réalisations
-            </h1>
-            <p className="text-xl text-secondary-300">
-              Découvrez nos projets terminés et suivez l'avancement de nos réalisations en cours.
-              Chaque projet illustre notre expertise et notre engagement qualité.
-            </p>
-          </div>
-        </div>
-      </section>
-
       {/* Filters */}
-      <section className="py-3 bg-secondary-50 border-b border-secondary-200 sticky top-20 z-40">
+      <section className={`bg-white border-b border-secondary-200 sticky z-40 transition-all duration-300 ${
+        isHeaderVisible ? 'top-20' : 'top-0'
+      }`}>
         <div className="container-custom">
-          <div className="flex flex-wrap gap-3 items-center">
-            <select
-              className="px-3 py-1.5 bg-white border-2 border-secondary-300 rounded-lg text-secondary-700 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500"
-              value={selectedStatus}
-              onChange={(e) => setSelectedStatus(e.target.value as FilterStatus)}
+          <nav className="flex items-center justify-center gap-8 py-4" aria-label="Filtres des projets">
+            <button
+              onClick={() => setSelectedStatus('completed')}
+              className={`text-sm font-semibold transition-colors pb-1.5 border-b-2 ${
+                selectedStatus === 'completed'
+                  ? 'text-primary-600 border-primary-600'
+                  : 'text-secondary-700 border-transparent hover:text-primary-600 hover:border-primary-300'
+              }`}
             >
-              <option value="completed">Projets clients</option>
-              <option value="process">Notre atelier</option>
-              <option value="all">Tous les projets</option>
-            </select>
-            {selectedStatus !== 'completed' && (
-              <button
-                onClick={() => setSelectedStatus('completed')}
-                className="text-sm text-primary-600 hover:text-primary-700 font-medium"
-              >
-                Réinitialiser
-              </button>
-            )}
-          </div>
+              Projets clients
+            </button>
+            <button
+              onClick={() => setSelectedStatus('process')}
+              className={`text-sm font-semibold transition-colors pb-1.5 border-b-2 ${
+                selectedStatus === 'process'
+                  ? 'text-primary-600 border-primary-600'
+                  : 'text-secondary-700 border-transparent hover:text-primary-600 hover:border-primary-300'
+              }`}
+            >
+              Notre atelier
+            </button>
+            <button
+              onClick={() => setSelectedStatus('all')}
+              className={`text-sm font-semibold transition-colors pb-1.5 border-b-2 ${
+                selectedStatus === 'all'
+                  ? 'text-primary-600 border-primary-600'
+                  : 'text-secondary-700 border-transparent hover:text-primary-600 hover:border-primary-300'
+              }`}
+            >
+              Toutes les photos
+            </button>
+          </nav>
         </div>
       </section>
 
       {/* Projects Grid */}
-      <section id="projects-section" className="py-16 bg-white">
-        <div className="container-custom">
+      <section id="projects-section" className="py-2 bg-white">
+        <div className="container-custom px-2">
           {loading ? (
             <div className="text-center py-12">
               <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-secondary-900"></div>
@@ -148,9 +194,9 @@ export default function RealisationsPage() {
             </div>
           ) : (
             <>
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-2">
                 {filteredProjects.map((project, index) => (
-                  <article key={project.id} className="group relative overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300">
+                  <article key={project.id} className="group relative overflow-hidden rounded-lg shadow-sm hover:shadow-xl transition-all duration-300">
                     {/* Image avec aspect ratio 4:3 */}
                     <div
                       className="aspect-[4/3] relative overflow-hidden bg-secondary-100 cursor-pointer"
@@ -194,70 +240,23 @@ export default function RealisationsPage() {
                 ))}
               </div>
 
-              {/* Compteur de projets */}
-              <div className="text-center mt-8 text-sm text-secondary-600">
-                {filteredProjects.length} projet{filteredProjects.length > 1 ? 's' : ''} affiché{filteredProjects.length > 1 ? 's' : ''}
-              </div>
-
               {/* CTA vers contact */}
-              <div className="text-center mt-12">
-                <Link href="/contact" className="btn-outline">
-                  Discuter de votre projet
+              <div className="text-center mt-8 bg-secondary-100 rounded-2xl py-12 px-6">
+                <h3 className="text-2xl font-bold text-secondary-900 mb-3">
+                  Vous avez un projet similaire ?
+                </h3>
+                <p className="text-lg text-secondary-600 mb-6">
+                  Nous vous accompagnons de la conception à la production.
+                </p>
+                <Link href="/contact" className="btn-primary text-lg px-8 py-4 inline-flex items-center gap-2">
+                  Échanger avec un expert
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
                 </Link>
               </div>
             </>
           )}
-        </div>
-      </section>
-
-      {/* Devis instantané CTA */}
-      <section className="py-16 bg-secondary-50">
-        <div className="container-custom">
-          <div className="bg-white rounded-2xl p-8 md:p-12 flex flex-col md:flex-row items-center gap-8">
-            <div className="flex-1">
-              <h2 className="text-2xl font-bold text-secondary-900 mb-4">
-                Obtenez un devis instantané pour votre fichier 3D
-              </h2>
-              <p className="text-secondary-600 mb-6">
-                Téléchargez votre fichier 3D et recevez un devis automatique en quelques secondes.
-                Idéal pour les pièces FDM ou Résine.
-              </p>
-              <a
-                href="https://impression3d.inphenix-system.fr"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-primary inline-flex"
-              >
-                Obtenir mon devis instantané
-                <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                </svg>
-              </a>
-            </div>
-            <div className="w-48 h-48 bg-gradient-to-br from-secondary-100 to-secondary-200 rounded-2xl flex items-center justify-center">
-              <svg className="w-20 h-20 text-secondary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21l-2-1m2 1l2-1m-2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5" />
-              </svg>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section className="py-24 bg-secondary-900">
-        <div className="container-custom">
-          <div className="text-center max-w-2xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
-              Envie de créer votre projet ?
-            </h2>
-            <p className="text-xl text-secondary-300 mb-8">
-              Discutons de votre idée. Nous vous accompagnons de la conception
-              à la réalisation.
-            </p>
-            <Link href="/contact" className="bg-white text-secondary-900 hover:bg-secondary-100 px-8 py-4 rounded-lg font-semibold text-lg transition-colors inline-block">
-              Demander un devis gratuit
-            </Link>
-          </div>
         </div>
       </section>
 
