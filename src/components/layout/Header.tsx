@@ -27,6 +27,8 @@ export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [servicesOpen, setServicesOpen] = useState(false)
   const [secteursOpen, setSecteursOpen] = useState(false)
+  const [mobileServicesOpen, setMobileServicesOpen] = useState(false)
+  const [mobileSecteursOpen, setMobileSecteursOpen] = useState(false)
   const [isVisible, setIsVisible] = useState(true)
   const [lastScrollY, setLastScrollY] = useState(0)
   const pathname = usePathname()
@@ -210,8 +212,16 @@ export default function Header() {
           <div className="lg:hidden pb-6">
             <div className="space-y-1">
               <div className="py-2">
-                <div className="font-semibold text-secondary-900 px-2 py-2">Services</div>
-                {services.map((service) => (
+                <button
+                  onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
+                  className="w-full flex items-center justify-between font-semibold text-secondary-900 px-2 py-2"
+                >
+                  Services
+                  <svg className={`w-4 h-4 transition-transform ${mobileServicesOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </button>
+                {mobileServicesOpen && services.map((service) => (
                   <Link
                     key={service.href}
                     href={service.href}
@@ -223,8 +233,16 @@ export default function Header() {
                 ))}
               </div>
               <div className="py-2 border-t border-secondary-100">
-                <div className="font-semibold text-secondary-900 px-2 py-2">Secteurs</div>
-                {secteurs.map((secteur) => (
+                <button
+                  onClick={() => setMobileSecteursOpen(!mobileSecteursOpen)}
+                  className="w-full flex items-center justify-between font-semibold text-secondary-900 px-2 py-2"
+                >
+                  Secteurs
+                  <svg className={`w-4 h-4 transition-transform ${mobileSecteursOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </button>
+                {mobileSecteursOpen && secteurs.map((secteur) => (
                   <Link
                     key={secteur.href}
                     href={secteur.href}

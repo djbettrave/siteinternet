@@ -8,17 +8,14 @@ export default function Hero() {
           <div className="max-w-3xl">
             {/* Headline */}
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6 mt-8">
-              Créativité &{' '}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-300 to-primary-500">
-                Technologie
-              </span>
-              <br />au service de vos projets
+              Impression 3D &{' '}
+              <br />
+              Fabrication sur mesure
             </h1>
 
             {/* Subheadline */}
-            <p className="text-xl text-secondary-300 mb-8">
-              <span className="block whitespace-nowrap">Bureau d'étude spécialisé en impression 3D et développement électronique.</span>
-              <span className="block whitespace-nowrap">Du prototype à la série, nous transformons vos idées en réalité.</span>
+            <p className="text-xl text-secondary-300 mb-8 whitespace-nowrap">
+              Prototypes, pièces techniques et productions en série, avec accompagnement personnalisé.
             </p>
 
             {/* CTAs */}
