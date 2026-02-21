@@ -1,0 +1,34 @@
+# Inphenix System
+
+> Bureau d'études spécialisé en impression 3D grand format, XXL et sur mesure. Basé à Suresnes (92), France.
+
+## Services
+
+- Impression 3D FDM : pièces techniques haute résistance, grand format jusqu'à 1 mètre, monobloc sans assemblage
+- Impression 3D Résine : précision et détails fins pour prototypes et pièces esthétiques
+- Impression 3D Grand Format : pièces XXL en un seul bloc, sans assemblage
+- Scan 3D : numérisation et rétro-ingénierie de pièces existantes
+- Modélisation 3D : conception sur mesure de fichiers 3D
+- Prototypage rapide : du concept au prototype fonctionnel
+- Électronique & Motorisation : développement de cartes et systèmes sur mesure
+
+## Secteurs
+
+- Retail : PLV, présentoirs, signalétique
+- Luxe : pièces sur mesure pour maisons de luxe
+- Événementiel : décors, installations, accessoires
+- Architecture : maquettes et prototypes architecturaux
+- Robotique : pièces mécaniques et boîtiers
+
+## Contact
+
+- Site web : https://www.inphenix-system.fr
+- Devis instantané : https://impression3d.inphenix-system.fr
+- Email : contact@inphenix-system.fr
+- Téléphone : +33 6 95 35 18 78
+- Adresse : 23 rue Édouard-Nieuport, 92150 Suresnes, France
+
+## Réseaux sociaux
+
+- LinkedIn : https://www.linkedin.com/company/inphenix-system/
+- Instagram : https://www.instagram.com/inphenixsystem/

@@ -62,8 +62,10 @@ export default function Header() {
   }, [lastScrollY, pathname])
 
   return (
-    <header className={`bg-white border-b border-secondary-200 sticky top-0 z-50 transition-transform duration-300 ${
-      isVisible ? 'translate-y-0' : '-translate-y-full'
+    <header className={`bg-white z-50 ${
+      mobileMenuOpen
+        ? 'fixed inset-0 overflow-y-auto flex flex-col'
+        : `sticky top-0 border-b border-secondary-200 transition-transform duration-300 ${isVisible ? 'translate-y-0' : '-translate-y-full'}`
     }`}>
       <nav className="container-custom" aria-label="Navigation principale">
         <div className="flex items-center justify-between h-20">
@@ -209,83 +211,85 @@ export default function Header() {
 
         {/* Mobile menu */}
         {mobileMenuOpen && (
-          <div className="lg:hidden pb-6">
-            <div className="space-y-1">
-              <div className="py-2">
-                <button
-                  onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
-                  className="w-full flex items-center justify-between font-semibold text-secondary-900 px-2 py-2"
-                >
-                  Services
-                  <svg className={`w-4 h-4 transition-transform ${mobileServicesOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                  </svg>
-                </button>
-                {mobileServicesOpen && services.map((service) => (
-                  <Link
-                    key={service.href}
-                    href={service.href}
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="block px-4 py-2 mx-2 text-secondary-600 hover:text-primary-600 hover:bg-primary-50 rounded-lg"
+          <div className="lg:hidden flex-1 border-t border-secondary-200">
+            <div className="container-custom py-6 flex flex-col h-full">
+              <div className="space-y-1 flex-1">
+                <div className="py-2">
+                  <button
+                    onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
+                    className="w-full flex items-center justify-between font-bold text-secondary-900 px-2 py-3 text-lg"
                   >
-                    {service.name}
-                  </Link>
-                ))}
-              </div>
-              <div className="py-2 border-t border-secondary-100">
-                <button
-                  onClick={() => setMobileSecteursOpen(!mobileSecteursOpen)}
-                  className="w-full flex items-center justify-between font-semibold text-secondary-900 px-2 py-2"
-                >
-                  Secteurs
-                  <svg className={`w-4 h-4 transition-transform ${mobileSecteursOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                  </svg>
-                </button>
-                {mobileSecteursOpen && secteurs.map((secteur) => (
-                  <Link
-                    key={secteur.href}
-                    href={secteur.href}
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="block px-4 py-2 mx-2 text-secondary-600 hover:text-primary-600 hover:bg-primary-50 rounded-lg"
+                    Services
+                    <svg className={`w-5 h-5 transition-transform ${mobileServicesOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </button>
+                  {mobileServicesOpen && services.map((service) => (
+                    <Link
+                      key={service.href}
+                      href={service.href}
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="block px-4 py-2 mx-2 text-secondary-600 hover:text-primary-600 hover:bg-primary-50 rounded-lg"
+                    >
+                      {service.name}
+                    </Link>
+                  ))}
+                </div>
+                <div className="py-2 border-t border-secondary-100">
+                  <button
+                    onClick={() => setMobileSecteursOpen(!mobileSecteursOpen)}
+                    className="w-full flex items-center justify-between font-bold text-secondary-900 px-2 py-3 text-lg"
                   >
-                    {secteur.name}
+                    Secteurs
+                    <svg className={`w-5 h-5 transition-transform ${mobileSecteursOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </button>
+                  {mobileSecteursOpen && secteurs.map((secteur) => (
+                    <Link
+                      key={secteur.href}
+                      href={secteur.href}
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="block px-4 py-2 mx-2 text-secondary-600 hover:text-primary-600 hover:bg-primary-50 rounded-lg"
+                    >
+                      {secteur.name}
+                    </Link>
+                  ))}
+                </div>
+                <div className="py-2 border-t border-secondary-100">
+                  <Link
+                    href="/realisations"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="block px-2 py-3 text-secondary-900 hover:text-primary-600 font-bold text-lg"
+                  >
+                    Réalisations
                   </Link>
-                ))}
+                  <Link
+                    href="/qui-sommes-nous"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="block px-2 py-3 text-secondary-900 hover:text-primary-600 font-bold text-lg border-t border-secondary-100"
+                  >
+                    À propos
+                  </Link>
+                  <Link
+                    href="/contact"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="block px-2 py-3 text-secondary-900 hover:text-primary-600 font-bold text-lg border-t border-secondary-100"
+                  >
+                    Contact
+                  </Link>
+                </div>
               </div>
-              <div className="py-2 border-t border-secondary-100">
-                <Link
-                  href="/realisations"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="block px-4 py-2 text-secondary-700 hover:text-primary-600 font-medium"
-                >
-                  Réalisations
-                </Link>
-                <Link
-                  href="/qui-sommes-nous"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="block px-4 py-2 text-secondary-700 hover:text-primary-600 font-medium"
-                >
-                  À propos
-                </Link>
-                <Link
-                  href="/contact"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="block px-4 py-2 text-secondary-700 hover:text-primary-600 font-medium"
-                >
-                  Contact
-                </Link>
-              </div>
-              <div className="pt-4">
+              <div className="pt-6 pb-8">
                 <a
                   href="https://impression3d.inphenix-system.fr"
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="btn-primary w-full text-center flex items-center justify-center gap-2"
+                  className="btn-primary w-full text-center flex items-center justify-center gap-2 py-4 text-lg"
                 >
                   Devis instantané
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                   </svg>
                 </a>

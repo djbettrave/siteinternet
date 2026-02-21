@@ -12,25 +12,28 @@ const inter = Inter({ subsets: ['latin'] })
 export const metadata: Metadata = {
   metadataBase: new URL('https://inphenix-system.fr'),
   title: {
-    default: 'Inphenix System | Bureau d\'étude Impression 3D & Électronique',
+    default: 'Impression 3D Grand Format & Sur Mesure | Inphenix',
     template: '%s | Inphenix System'
   },
-  description: 'Bureau d\'étude spécialisé en impression 3D (FDM, résine, grand format) et développement électronique. Prototypage rapide, scan 3D, modélisation. Devis en ligne gratuit.',
-  keywords: ['impression 3D', 'prototypage rapide', 'électronique', 'bureau d\'étude', 'scan 3D', 'modélisation 3D', 'FDM', 'résine'],
+  description: 'Impression 3D grand format, XXL et sur mesure. FDM, résine, pièces monobloc sans assemblage. Devis instantané gratuit en ligne.',
+  keywords: ['impression 3D', 'impression 3D grand format', 'impression 3D XXL', 'impression 3D sur mesure', 'pièce monobloc', 'devis instantané', 'FDM', 'résine', 'prototypage rapide', 'scan 3D', 'modélisation 3D'],
   authors: [{ name: 'Inphenix System' }],
   creator: 'Inphenix System',
+  alternates: {
+    canonical: 'https://www.inphenix-system.fr',
+  },
   openGraph: {
     type: 'website',
     locale: 'fr_FR',
     url: 'https://inphenix-system.fr',
     siteName: 'Inphenix System',
-    title: 'Inphenix System | Bureau d\'étude Impression 3D & Électronique',
-    description: 'Bureau d\'étude spécialisé en impression 3D et développement électronique. Prototypage rapide pour tous secteurs.',
+    title: 'Impression 3D Grand Format & Sur Mesure | Inphenix',
+    description: 'Impression 3D grand format, XXL et sur mesure. FDM, résine, pièces monobloc sans assemblage. Devis instantané gratuit.',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Inphenix System | Impression 3D & Électronique',
-    description: 'Bureau d\'étude spécialisé en impression 3D et développement électronique.',
+    title: 'Impression 3D Grand Format & Sur Mesure | Inphenix',
+    description: 'Impression 3D grand format, XXL et sur mesure. FDM, résine, pièces monobloc. Devis instantané gratuit.',
   },
   robots: {
     index: true,
