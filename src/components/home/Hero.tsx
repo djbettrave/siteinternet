@@ -14,7 +14,7 @@ export default function Hero() {
             </h1>
 
             {/* Subheadline */}
-            <p className="text-xl text-secondary-300 mb-8 whitespace-nowrap">
+            <p className="text-xl text-secondary-300 mb-8">
               Prototypes, pièces techniques et productions en série, avec accompagnement personnalisé.
             </p>
 

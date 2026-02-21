@@ -67,7 +67,7 @@ export default function Header() {
         ? 'fixed inset-0 overflow-y-auto flex flex-col'
         : `sticky top-0 border-b border-secondary-200 transition-transform duration-300 ${isVisible ? 'translate-y-0' : '-translate-y-full'}`
     }`}>
-      <nav className="container-custom" aria-label="Navigation principale">
+      <nav className={mobileMenuOpen ? 'flex flex-col flex-1 px-4 sm:px-6 w-full' : 'container-custom'} aria-label="Navigation principale">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <div className="flex-shrink-0">
@@ -211,8 +211,8 @@ export default function Header() {
 
         {/* Mobile menu */}
         {mobileMenuOpen && (
-          <div className="lg:hidden flex-1 border-t border-secondary-200">
-            <div className="container-custom py-6 flex flex-col h-full">
+          <div className="lg:hidden flex-1 flex flex-col border-t border-secondary-200">
+            <div className="py-6 flex flex-col flex-1">
               <div className="space-y-1 flex-1">
                 <div className="py-2">
                   <button
