@@ -2,14 +2,23 @@
 
 import Script from 'next/script'
 
+const GA_MEASUREMENT_ID = 'G-18ZDFXS5YV'
+
 export default function TarteaucitronInit() {
   return (
     <Script
       src="https://cdn.jsdelivr.net/npm/tarteaucitronjs@1.17.0/tarteaucitron.min.js"
       strategy="afterInteractive"
       onLoad={() => {
-        const w = window as Window & { tarteaucitron?: { init: (config: Record<string, unknown>) => void } }
-        w.tarteaucitron && w.tarteaucitron.init({
+        const w = window as Window & {
+          tarteaucitron?: {
+            init: (config: Record<string, unknown>) => void
+            user: Record<string, unknown>
+            job: string[]
+          }
+        }
+        if (!w.tarteaucitron) return
+        w.tarteaucitron.init({
           privacyUrl: '/politique-confidentialite',
           bodyPosition: 'bottom',
           hashtag: '#tarteaucitron',
@@ -37,6 +46,9 @@ export default function TarteaucitronInit() {
           mandatoryCta: true,
           googleConsentMode: false,
         })
+        // Google Analytics 4 — chargé uniquement après consentement
+        w.tarteaucitron.user.gtagUa = GA_MEASUREMENT_ID
+        ;(w.tarteaucitron.job = w.tarteaucitron.job || []).push('gtag')
       }}
     />
   )
