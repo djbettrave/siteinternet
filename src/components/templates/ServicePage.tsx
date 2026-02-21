@@ -42,18 +42,21 @@ export interface ServiceData {
 
 export function generateServiceMetadata(service: ServiceData): Metadata {
   return {
-    title: `${service.name}${service.category ? ` - ${service.category}` : ''}`,
-    description: service.description,
+    title: `${service.name} sur mesure – Devis instantané`,
+    description: service.subheadline,
     keywords: [
       service.name.toLowerCase(),
-      'bureau d\'étude',
-      'prototypage',
+      `${service.name.toLowerCase()} sur mesure`,
+      'impression 3D',
+      'impression 3D grand format',
+      'devis instantané',
+      'prototypage rapide',
       'sur mesure',
       'France',
     ],
     openGraph: {
-      title: `${service.name} - Inphenix System`,
-      description: service.description,
+      title: `${service.name} sur mesure – Inphenix System`,
+      description: service.subheadline,
       type: 'website',
     },
   }
@@ -105,18 +108,14 @@ export default function ServicePage({ service }: ServicePageProps) {
 
               <h1 className="text-4xl md:text-5xl font-bold text-white leading-tight mb-6">
                 {service.headline.split('\n').map((line, index) => (
-                  <span key={index} className="block whitespace-nowrap">
+                  <span key={index} className="block">
                     {line}
                   </span>
                 ))}
               </h1>
 
               <p className="text-xl text-secondary-300 mb-8 max-w-2xl">
-                {service.subheadline.split('. ').map((sentence, index, array) => (
-                  <span key={index} className="block whitespace-nowrap">
-                    {sentence}{index < array.length - 1 ? '.' : sentence.endsWith('.') ? '' : '.'}
-                  </span>
-                ))}
+                {service.subheadline}
               </p>
 
               {/* CTA uniquement pour FDM et Résine */}

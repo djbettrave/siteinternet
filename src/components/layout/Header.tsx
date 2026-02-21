@@ -78,6 +78,7 @@ export default function Header() {
                 width={32}
                 height={32}
                 className="w-8 h-8"
+                priority
               />
               <div className="flex items-center space-x-1">
                 <span className="text-xl font-bold text-gradient">Inphenix</span>

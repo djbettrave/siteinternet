@@ -2,8 +2,8 @@ import { Metadata } from 'next'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: 'Nos Services',
-  description: 'Découvrez nos services d\'impression 3D, scan 3D, modélisation, prototypage rapide et développement électronique. Solutions sur mesure pour tous vos projets.',
+  title: 'Impression 3D FDM, Résine & Grand Format – Services sur mesure',
+  description: 'Impression 3D FDM, résine, grand format XXL, scan 3D, modélisation et prototypage sur mesure. Devis instantané gratuit.',
 }
 
 const serviceCategories = [
@@ -77,11 +77,10 @@ export default function ServicesPage() {
         <div className="container-custom">
           <div className="max-w-3xl">
             <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
-              Nos services
+              Impression 3D & fabrication sur mesure
             </h1>
             <p className="text-xl text-secondary-300">
-              De l'impression 3D à l'électronique, une expertise complète
-              pour donner vie à vos projets les plus ambitieux.
+              FDM, résine, grand format XXL, scan 3D et prototypage — une expertise complète pour donner vie à vos projets les plus ambitieux.
             </p>
           </div>
         </div>

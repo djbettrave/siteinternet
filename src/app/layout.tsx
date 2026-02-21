@@ -1,11 +1,11 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
-import Script from 'next/script'
 import './globals.css'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 import OrganizationSchema from '@/components/seo/OrganizationSchema'
 import LocalBusinessSchema from '@/components/seo/LocalBusinessSchema'
+import TarteaucitronInit from '@/components/analytics/TarteaucitronInit'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -61,42 +61,7 @@ export default function RootLayout({
       </head>
       <body className={`${inter.className} bg-white text-secondary-900`}>
         {/* Tarteaucitron - Gestion des cookies RGPD */}
-        <Script
-          src="https://cdn.jsdelivr.net/npm/tarteaucitronjs@1.17.0/tarteaucitron.min.js"
-          strategy="afterInteractive"
-        />
-        <Script id="tarteaucitron-init" strategy="afterInteractive">
-          {`
-            tarteaucitron.init({
-              "privacyUrl": "/politique-confidentialite",
-              "bodyPosition": "bottom",
-              "hashtag": "#tarteaucitron",
-              "cookieName": "tarteaucitron",
-              "orientation": "bottom",
-              "groupServices": false,
-              "showDetailsOnClick": true,
-              "serviceDefaultState": "wait",
-              "showAlertSmall": false,
-              "cookieslist": false,
-              "closePopup": false,
-              "showIcon": true,
-              "iconPosition": "BottomLeft",
-              "adblocker": false,
-              "DenyAllCta": true,
-              "AcceptAllCta": true,
-              "highPrivacy": true,
-              "alwaysNeedConsent": false,
-              "handleBrowserDNTRequest": false,
-              "removeCredit": false,
-              "moreInfoLink": true,
-              "useExternalCss": false,
-              "useExternalJs": false,
-              "mandatory": true,
-              "mandatoryCta": true,
-              "googleConsentMode": false
-            });
-          `}
-        </Script>
+        <TarteaucitronInit />
         <Header />
         <main className="min-h-screen">
           {children}
