@@ -5,7 +5,7 @@ import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 import OrganizationSchema from '@/components/seo/OrganizationSchema'
 import LocalBusinessSchema from '@/components/seo/LocalBusinessSchema'
-import TarteaucitronInit from '@/components/analytics/TarteaucitronInit'
+import CookieBanner from '@/components/analytics/CookieBanner'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -60,8 +60,7 @@ export default function RootLayout({
         <LocalBusinessSchema />
       </head>
       <body className={`${inter.className} bg-white text-secondary-900`}>
-        {/* Tarteaucitron - Gestion des cookies RGPD */}
-        <TarteaucitronInit />
+        <CookieBanner />
         <Header />
         <main className="min-h-screen">
           {children}
