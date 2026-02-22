@@ -59,14 +59,25 @@ export default function CookieBanner() {
 
       {/* Banner cookies */}
       {visible && (
-        <div className="fixed bottom-0 left-0 right-0 z-[9999] bg-secondary-900 border-t border-secondary-700 px-4 py-4">
-          <div className="container-custom flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
-            <p className="text-sm text-secondary-300 leading-relaxed">
-              Nous utilisons des cookies pour mesurer notre audience (Google Analytics).{' '}
-              <Link href="/politique-confidentialite" className="text-white underline hover:text-primary-400 transition-colors">
-                En savoir plus
+        <div className="fixed bottom-0 left-0 right-0 z-[9999] bg-secondary-900/95 backdrop-blur-sm border-t border-secondary-700 px-4 py-4 shadow-lg">
+          <div className="container-custom flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <div className="flex-1">
+              <p className="text-sm text-secondary-200 leading-relaxed">
+                <span className="font-semibold text-white">Cookies analytiques</span>
+                {' · '}
+                Nous utilisons Google Analytics pour améliorer votre expérience.
+                Aucune donnée n&apos;est partagée à des fins publicitaires.
+              </p>
+              <Link
+                href="/politique-confidentialite"
+                className="inline-flex items-center gap-1 text-xs text-secondary-400 hover:text-primary-400 transition-colors mt-1"
+              >
+                Politique de confidentialité
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" className="w-3 h-3">
+                  <path fillRule="evenodd" d="M4.22 11.78a.75.75 0 0 1 0-1.06L9.44 5.5H5.75a.75.75 0 0 1 0-1.5h5.5a.75.75 0 0 1 .75.75v5.5a.75.75 0 0 1-1.5 0V6.56l-5.22 5.22a.75.75 0 0 1-1.06 0Z" clipRule="evenodd" />
+                </svg>
               </Link>
-            </p>
+            </div>
             <div className="flex gap-2 flex-shrink-0">
               <button
                 onClick={refuse}
