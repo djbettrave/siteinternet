@@ -3,8 +3,8 @@ export default function OrganizationSchema() {
     '@context': 'https://schema.org',
     '@type': 'Organization',
     name: 'Inphenix System',
-    url: 'https://inphenix-system.fr',
-    logo: 'https://inphenix-system.fr/logo.png',
+    url: 'https://www.inphenix-system.fr',
+    logo: 'https://www.inphenix-system.fr/logo.png',
     description: 'Bureau d\'étude spécialisé en impression 3D et développement électronique. Prototypage rapide, scan 3D, modélisation pour tous secteurs.',
     address: {
       '@type': 'PostalAddress',

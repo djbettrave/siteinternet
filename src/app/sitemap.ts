@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://inphenix-system.fr'
+  const baseUrl = 'https://www.inphenix-system.fr'
 
   const staticPages = [
     '',

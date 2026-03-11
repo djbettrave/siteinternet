@@ -10,7 +10,7 @@ import CookieBanner from '@/components/analytics/CookieBanner'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://inphenix-system.fr'),
+  metadataBase: new URL('https://www.inphenix-system.fr'),
   title: {
     default: 'Impression 3D Grand Format & Sur Mesure | Inphenix',
     template: '%s | Inphenix System'
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'fr_FR',
-    url: 'https://inphenix-system.fr',
+    url: 'https://www.inphenix-system.fr',
     siteName: 'Inphenix System',
     title: 'Impression 3D Grand Format & Sur Mesure | Inphenix',
     description: 'Impression 3D grand format, XXL et sur mesure. FDM, résine, pièces monobloc sans assemblage. Devis instantané gratuit.',

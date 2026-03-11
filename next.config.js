@@ -1,5 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // Supprime les trailing slashes (/services/ → /services)
+  trailingSlash: false,
   images: {
     remotePatterns: [
       {
@@ -7,6 +9,29 @@ const nextConfig = {
         hostname: 'impression3d.inphenix-system.fr',
       },
     ],
+  },
+  async redirects() {
+    return [
+      // Anciennes URLs WooCommerce (WordPress) → redirection 301
+      {
+        source: '/produit/:slug*',
+        destination: '/realisations',
+        permanent: true,
+      },
+      // Ancienne URL portfolio WordPress
+      {
+        source: '/works/:slug*',
+        destination: '/realisations',
+        permanent: true,
+      },
+      // Ancien paramètre WordPress MailPoet
+      {
+        source: '/',
+        has: [{ type: 'query', key: 'mailpoet_page' }],
+        destination: '/',
+        permanent: true,
+      },
+    ]
   },
   async headers() {
     return [

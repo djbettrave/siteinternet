@@ -2,10 +2,10 @@ export default function LocalBusinessSchema() {
   const schema = {
     '@context': 'https://schema.org',
     '@type': 'LocalBusiness',
-    '@id': 'https://inphenix-system.fr/#localbusiness',
+    '@id': 'https://www.inphenix-system.fr/#localbusiness',
     name: 'Inphenix System',
     description: 'Bureau d\'étude spécialisé en impression 3D et développement électronique.',
-    url: 'https://inphenix-system.fr',
+    url: 'https://www.inphenix-system.fr',
     telephone: '',
     email: 'contact@inphenix-system.fr',
     address: {

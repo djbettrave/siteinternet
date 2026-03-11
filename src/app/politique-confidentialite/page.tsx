@@ -28,7 +28,7 @@ export default function PolitiqueConfidentialitePage() {
       {/* Content */}
       <section className="py-16 bg-white">
         <div className="container-custom">
-          <div className="max-w-3xl mx-auto prose prose-secondary">
+          <div className="max-w-3xl mx-auto prose prose-lg prose-slate prose-headings:text-secondary-900 prose-headings:font-bold prose-a:text-primary-600 prose-a:no-underline hover:prose-a:underline prose-strong:text-secondary-900">
 
             <p className="lead">
               SAS Inphenix System s'engage à protéger la vie privée des utilisateurs de son site
