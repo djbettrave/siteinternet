@@ -7,7 +7,7 @@ import OrganizationSchema from '@/components/seo/OrganizationSchema'
 import LocalBusinessSchema from '@/components/seo/LocalBusinessSchema'
 import CookieBanner from '@/components/analytics/CookieBanner'
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ['latin'], display: 'swap' })
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.inphenix-system.fr'),
@@ -53,6 +53,8 @@ export default function RootLayout({
   return (
     <html lang="fr">
       <head>
+        <link rel="preconnect" href="https://www.googletagmanager.com" />
+        <link rel="dns-prefetch" href="https://www.google-analytics.com" />
         <OrganizationSchema />
         <LocalBusinessSchema />
       </head>

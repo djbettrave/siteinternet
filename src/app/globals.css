@@ -5,11 +5,11 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
   }
 
   body {
     @apply antialiased;
-    overflow-x: hidden;
   }
 }
 
