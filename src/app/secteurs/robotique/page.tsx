@@ -4,7 +4,7 @@ import { sectorsData } from '@/data/sectors'
 
 const sector = sectorsData.robotique
 
-export const metadata: Metadata = generateSectorMetadata(sector)
+export const metadata: Metadata = generateSectorMetadata(sector, '/secteurs/robotique')
 
 export default function RobotiquePage() {
   return <SectorPage sector={sector} />

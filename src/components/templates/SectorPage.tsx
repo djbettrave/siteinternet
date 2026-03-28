@@ -33,7 +33,7 @@ export interface SectorData {
   }[]
 }
 
-export function generateSectorMetadata(sector: SectorData): Metadata {
+export function generateSectorMetadata(sector: SectorData, path?: string): Metadata {
   return {
     title: `${sector.name} | Impression 3D & Électronique`,
     description: sector.description,
@@ -44,6 +44,11 @@ export function generateSectorMetadata(sector: SectorData): Metadata {
       'bureau d\'étude',
       'électronique',
     ],
+    ...(path && {
+      alternates: {
+        canonical: `https://www.inphenix-system.fr${path}`,
+      },
+    }),
     openGraph: {
       title: `${sector.name} - Inphenix System`,
       description: sector.description,

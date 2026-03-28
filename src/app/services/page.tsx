@@ -4,6 +4,9 @@ import Link from 'next/link'
 export const metadata: Metadata = {
   title: 'Impression 3D FDM, Résine & Grand Format – Services sur mesure',
   description: 'Impression 3D FDM, résine, grand format XXL, scan 3D, modélisation et prototypage sur mesure. Devis instantané gratuit.',
+  alternates: {
+    canonical: 'https://www.inphenix-system.fr/services',
+  },
 }
 
 const serviceCategories = [

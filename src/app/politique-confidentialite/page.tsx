@@ -4,6 +4,9 @@ import Link from 'next/link'
 export const metadata: Metadata = {
   title: 'Politique de Confidentialité',
   description: 'Politique de confidentialité du site Inphenix System - Protection des données personnelles et RGPD.',
+  alternates: {
+    canonical: 'https://www.inphenix-system.fr/politique-confidentialite',
+  },
 }
 
 export default function PolitiqueConfidentialitePage() {

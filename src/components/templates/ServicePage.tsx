@@ -40,7 +40,7 @@ export interface ServiceData {
   }[]
 }
 
-export function generateServiceMetadata(service: ServiceData): Metadata {
+export function generateServiceMetadata(service: ServiceData, path?: string): Metadata {
   return {
     title: `${service.name} sur mesure – Devis instantané`,
     description: service.subheadline,
@@ -54,6 +54,11 @@ export function generateServiceMetadata(service: ServiceData): Metadata {
       'sur mesure',
       'France',
     ],
+    ...(path && {
+      alternates: {
+        canonical: `https://www.inphenix-system.fr${path}`,
+      },
+    }),
     openGraph: {
       title: `${service.name} sur mesure – Inphenix System`,
       description: service.subheadline,

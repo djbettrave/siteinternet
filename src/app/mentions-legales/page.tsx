@@ -4,6 +4,9 @@ import Link from 'next/link'
 export const metadata: Metadata = {
   title: 'Mentions Légales',
   description: 'Mentions légales du site Inphenix System - Informations juridiques et légales.',
+  alternates: {
+    canonical: 'https://www.inphenix-system.fr/mentions-legales',
+  },
 }
 
 export default function MentionsLegalesPage() {

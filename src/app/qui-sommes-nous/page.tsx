@@ -5,6 +5,9 @@ import Image from 'next/image'
 export const metadata: Metadata = {
   title: 'Qui sommes-nous ?',
   description: 'Découvrez Inphenix System, bureau d\'étude spécialisé en impression 3D et électronique. Notre histoire, nos valeurs et notre engagement qualité.',
+  alternates: {
+    canonical: 'https://www.inphenix-system.fr/qui-sommes-nous',
+  },
 }
 
 const values = [

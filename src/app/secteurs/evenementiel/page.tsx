@@ -4,7 +4,7 @@ import { sectorsData } from '@/data/sectors'
 
 const sector = sectorsData.evenementiel
 
-export const metadata: Metadata = generateSectorMetadata(sector)
+export const metadata: Metadata = generateSectorMetadata(sector, '/secteurs/evenementiel')
 
 export default function EvenementielPage() {
   return <SectorPage sector={sector} />

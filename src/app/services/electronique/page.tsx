@@ -4,7 +4,7 @@ import { servicesData } from '@/data/services'
 
 const service = servicesData['electronique']
 
-export const metadata: Metadata = generateServiceMetadata(service)
+export const metadata: Metadata = generateServiceMetadata(service, '/services/electronique')
 
 export default function ElectroniquePage() {
   return <ServicePage service={service} />

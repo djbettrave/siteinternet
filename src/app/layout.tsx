@@ -19,9 +19,6 @@ export const metadata: Metadata = {
   keywords: ['impression 3D', 'impression 3D grand format', 'impression 3D XXL', 'impression 3D sur mesure', 'pièce monobloc', 'devis instantané', 'FDM', 'résine', 'prototypage rapide', 'scan 3D', 'modélisation 3D'],
   authors: [{ name: 'Inphenix System' }],
   creator: 'Inphenix System',
-  alternates: {
-    canonical: 'https://www.inphenix-system.fr',
-  },
   openGraph: {
     type: 'website',
     locale: 'fr_FR',

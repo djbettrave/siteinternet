@@ -4,7 +4,7 @@ import { servicesData } from '@/data/services'
 
 const service = servicesData['impression-3d-resine']
 
-export const metadata: Metadata = generateServiceMetadata(service)
+export const metadata: Metadata = generateServiceMetadata(service, '/services/impression-3d/resine')
 
 export default function ResinePage() {
   return <ServicePage service={service} />

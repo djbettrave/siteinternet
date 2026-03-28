@@ -4,7 +4,7 @@ import { sectorsData } from '@/data/sectors'
 
 const sector = sectorsData.luxe
 
-export const metadata: Metadata = generateSectorMetadata(sector)
+export const metadata: Metadata = generateSectorMetadata(sector, '/secteurs/luxe')
 
 export default function LuxePage() {
   return <SectorPage sector={sector} />

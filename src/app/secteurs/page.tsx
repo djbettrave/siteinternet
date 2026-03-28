@@ -5,6 +5,9 @@ import { sectorsList } from '@/data/sectors'
 export const metadata: Metadata = {
   title: 'Nos Secteurs d\'Expertise',
   description: 'Découvrez nos expertises sectorielles en impression 3D et électronique : Retail, Luxe, Événementiel, Architecture, Robotique.',
+  alternates: {
+    canonical: 'https://www.inphenix-system.fr/secteurs',
+  },
 }
 
 export default function SecteursPage() {
